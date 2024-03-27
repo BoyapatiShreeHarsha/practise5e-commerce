@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import Navbar from "../components/Navbar"
+import Navbar from "../features/navbar/components/Navbar"
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Checkbox, FormControlLabel, IconButton, Menu, MenuItem, Pagination, Paper, Stack, Typography } from '@mui/material'
 import styles from "./Home.module.css"
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import { rowDivider } from '../utils/muiCustomComponents';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ProductList from '../components/product-list/ProductList';
+import ProductList from '../features/product-list/components/ProductList';
 import CloseIcon from '@mui/icons-material/Close';
 
 

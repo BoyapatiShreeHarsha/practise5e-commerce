@@ -15,7 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Badge, Divider, Stack } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
-import { customButton } from "../utils/muiCustomComponents";
+import { customButton } from "../../../utils/muiCustomComponents";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Your Profile", "Settings", "Logout"];
