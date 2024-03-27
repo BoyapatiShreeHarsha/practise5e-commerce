@@ -16,3 +16,18 @@ export const customButton = (info) => {
         </>
     )
 }
+
+export const rowDivider = (obj) => {
+    const node = obj?.node;
+    return (<div style={{ padding: node?.padding || "" }}>
+        <div
+            className='rowDivider'
+            style={{
+                border: 'none',
+                borderBottom: node?.color ? `1px solid ${node?.color}` : `1px solid black`,
+                opacity: "0.4",
+                margin: node?.margin
+            }}>
+        </div>
+    </div>)
+}

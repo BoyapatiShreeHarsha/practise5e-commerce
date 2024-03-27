@@ -1,0 +1,41 @@
+.topBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.paperComponent {
+    width: 90%;
+    margin: 10px auto;
+    padding: 2% 4%;
+    position: relative;
+}
+
+.IconBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.middleBox {
+    display: flex;
+    align-items: flex-start;
+}
+
+.filterBar {
+    position: fixed;
+    top: 0px;
+    right: -100%;
+    max-width: 80%;
+    width: 300px;
+    height: 100vh;
+    background-color: rgb(243 244 246);
+    transition: right 0.3s ease;
+    z-index: 2;
+    overflow-y: auto;
+}
+
+.open {
+    right: 0px;
+}
