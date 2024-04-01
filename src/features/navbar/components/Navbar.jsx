@@ -16,6 +16,7 @@ import { Badge, Divider, Stack } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
 import { customButton } from "../../../utils/muiCustomComponents";
+import { Link } from "react-router-dom";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Your Profile", "Settings", "Logout"];
@@ -103,9 +104,11 @@ function ResponsiveAppBar() {
                         </Box>
 
                         <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" }, justifyContent: "flex-end", alignItems: "center" }}>
-                            <Badge badgeContent={4} color="primary" sx={{ marginRight: "20px" }}>
-                                <ShoppingCartIcon />
-                            </Badge>
+                            <Link to={'/cart'} style={{ color: "white" }}>
+                                <Badge badgeContent={4} color="primary" sx={{ marginRight: "20px" }}>
+                                    <ShoppingCartIcon />
+                                </Badge>
+                            </Link>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -183,9 +186,11 @@ function ResponsiveAppBar() {
                             <p>useremail@gmail.com</p>
                         </Box>
                     </Box>
-                    <Badge badgeContent={4} color="primary">
-                        <ShoppingCartIcon />
-                    </Badge>
+                    <Link to={'/cart'} style={{ color: "white" }}>
+                        <Badge badgeContent={4} color="primary">
+                            <ShoppingCartIcon />
+                        </Badge>
+                    </Link>
                 </Box>
                 <Stack spacing={1}>
                     {

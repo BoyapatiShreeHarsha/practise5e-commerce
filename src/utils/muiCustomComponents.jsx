@@ -25,7 +25,7 @@ export const rowDivider = (obj) => {
             style={{
                 border: 'none',
                 borderBottom: node?.color ? `1px solid ${node?.color}` : `1px solid black`,
-                opacity: "0.4",
+                opacity: node?.color ? "1" : "0.4",
                 margin: node?.margin
             }}>
         </div>
