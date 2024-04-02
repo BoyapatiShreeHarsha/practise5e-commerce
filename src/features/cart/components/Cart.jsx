@@ -94,7 +94,7 @@ export default function Cart() {
                             </Typography>
                         </Box>
                     </Box>
-                    <Link to="" style={{ width: "100%" }}>
+                    <Link to="/checkout" style={{ width: "100%" }}>
                         <Button variant='contained' sx={{ width: "100%", padding: "10px 16px" }}>Checkout</Button>
                     </Link>
                     <Typography variant='body'>

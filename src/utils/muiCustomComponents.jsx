@@ -1,4 +1,4 @@
-import { Button, styled } from "@mui/material";
+import { Box, Button, TextField, styled } from "@mui/material";
 import React from 'react';
 
 
@@ -30,4 +30,34 @@ export const rowDivider = (obj) => {
             }}>
         </div>
     </div>)
+}
+
+
+const StyledTextField = styled(TextField)(({ classprops }) => ({
+    '& .MuiInputBase-root': {
+        borderRadius: '2px',
+    },
+    '& .MuiOutlinedInput-root': {
+        borderRadius: '2px',
+        minHeight: '0px !important'
+    },
+    '& input': {
+        padding: '0px 6px !important',
+        fontSize: '12px',
+        height: '28px',
+        borderRadius: '2px',
+        minHeight: '0px !important',
+    },
+    '& fieldset': {
+        border: classprops?.fieldsetBorder || '',
+    }
+}));
+
+
+export const customTextFeild = (info) => {
+    return (
+
+        <StyledTextField {...info} />
+
+    )
 }

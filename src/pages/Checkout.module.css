@@ -1,0 +1,48 @@
+.topBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-top: 20px;
+}
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.box1 {
+    width: 100%;
+}
+
+.box2 {
+    width: 60%;
+}
+
+.box3 {
+    width: 50%;
+}
+
+.formChild {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.addBoxMain {
+    border: 1px solid rgb(229 231 235);
+    display: flex;
+    align-items: center;
+    padding: 5% 2%;
+    margin-top: 2%;
+}
+
+.addBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+}
