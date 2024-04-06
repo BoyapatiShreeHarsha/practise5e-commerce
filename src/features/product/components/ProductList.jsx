@@ -11,7 +11,6 @@ import { ITEMS_PER_PAGE } from '../../../app/contants';
 export default function ProductList({ filterState, sortState, page }) {
     const dispatch = useDispatch();
     const products = useSelector(selectAllProducts);
-    console.log(products);
 
     useEffect(() => {
         let pageState = {

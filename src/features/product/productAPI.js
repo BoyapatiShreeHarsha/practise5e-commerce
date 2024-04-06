@@ -40,3 +40,21 @@ export function fetchProductsByFilters(filter, sort, page) {
     }
     );
 }
+
+export function fetchAllCategories() {
+    return new Promise(async (resolve) => {
+        const response = await axios.get('/categories');
+        // console.log(response);
+        resolve(response)
+    }
+    );
+}
+
+export function fetchAllBrands() {
+    return new Promise(async (resolve) => {
+        const response = await axios.get('/brands');
+        // console.log(response);
+        resolve(response)
+    }
+    );
+}
