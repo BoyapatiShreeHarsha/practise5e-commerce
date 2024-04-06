@@ -1,72 +1,49 @@
 import { Box, Breadcrumbs, Button, FormControl, FormControlLabel, FormLabel, Grid, ImageList, ImageListItem, Link, Paper, Radio, RadioGroup, Rating, Stack, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../../navbar/components/Navbar'
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './ProductDetails.module.css'
 import { borderColor } from '../../../utils/platfromThemes'
+import { useParams } from 'react-router-dom'
+import { fetchProductAsync, selectProduct } from '../productSlice';
 
-const product = {
-    name: 'Basic Tee 6-Pack',
-    price: '$192',
-    href: '#',
-    breadcrumbs: [
-        { id: 1, name: 'Men', href: '#' },
-        { id: 2, name: 'Clothing', href: '#' },
-    ],
-    images: [
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-            alt: 'Two each of gray, white, and black shirts laying flat.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-            alt: 'Model wearing plain black basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-            alt: 'Model wearing plain gray basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-            alt: 'Model wearing plain white basic tee.',
-        },
-    ],
-    colors: [
-        { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-        { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-        { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-    ],
-    sizes: [
-        { name: 'XXS', inStock: false },
-        { name: 'XS', inStock: true },
-        { name: 'S', inStock: true },
-        { name: 'M', inStock: true },
-        { name: 'L', inStock: true },
-        { name: 'XL', inStock: true },
-        { name: '2XL', inStock: true },
-        { name: '3XL', inStock: true },
-    ],
-    description:
-        'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-    highlights: [
-        'Hand cut and sewn locally',
-        'Dyed with our proprietary colors',
-        'Pre-washed & pre-shrunk',
-        'Ultra-soft 100% cotton',
-    ],
-    details:
-        'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
+
+let highlights = [
+    'Hand cut and sewn locally',
+    'Dyed with our proprietary colors',
+    'Pre-washed & pre-shrunk',
+    'Ultra-soft 100% cotton',
+]
+
+let colors = [
+    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
+    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
+    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
+]
+let sizes = [
+    { name: 'XXS', inStock: false },
+    { name: 'XS', inStock: true },
+    { name: 'S', inStock: true },
+    { name: 'M', inStock: true },
+    { name: 'L', inStock: true },
+    { name: 'XL', inStock: true },
+    { name: '2XL', inStock: true },
+    { name: '3XL', inStock: true },
+]
 const reviews = { href: '#', average: 4, totalCount: 117 }
 
 
 export default function ProductDetails() {
-    const [Color, setColor] = useState(product?.colors?.[0]?.name)
+    const [Color, setColor] = useState(colors?.[0]?.name)
+    const params = useParams();
+    const product = useSelector(selectProduct);
+    const dispatch = useDispatch();
     const handleChangeColor = (event) => {
         setColor(event.target.value);
     };
     function firstAvailable() {
         let index = 0;
-        for (let obj of product?.sizes) {
+        for (let obj of sizes) {
             if (obj.inStock) {
                 return index;
             }
@@ -76,7 +53,13 @@ export default function ProductDetails() {
     }
     let firstIndex = firstAvailable();
 
-    const [selectSize, setselectSize] = useState(product?.sizes?.[firstIndex]?.name);
+    useEffect(() => {
+        let id = params.id;
+        dispatch(fetchProductAsync({ id }));
+    }, [params.id])
+
+
+    const [selectSize, setselectSize] = useState(sizes?.[firstIndex]?.name);
     return (
         <Box sx={{ bgcolor: "rgb(243 244 246)", height: "100vh" }}>
             <Navbar />
@@ -93,16 +76,16 @@ export default function ProductDetails() {
                             </Link>
                         )
                     })}
-                    <Typography color="text.primary">{product.name}</Typography>
+                    <Typography color="text.primary">{product.title}</Typography>
                 </Breadcrumbs>
                 {/* image collape */}
                 <ImageList variant="masonry" cols={3} gap={8} sx={{ marginTop: "20px" }}>
                     {product?.images?.map((item, index) => (
                         <ImageListItem key={index}>
                             <img
-                                srcSet={`${item.src}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                src={`${item.src}?w=248&fit=crop&auto=format`}
-                                alt={item.alt}
+                                srcSet={`${item}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                src={`${item}?w=248&fit=crop&auto=format`}
+                                alt={product.title}
                                 loading="lazy"
                             />
                         </ImageListItem>
@@ -110,7 +93,7 @@ export default function ProductDetails() {
                 </ImageList>
                 {/* info box */}
                 <Typography variant='h5' gutterBottom>
-                    {product?.name}
+                    {product?.title}
                 </Typography>
                 <Stack direction={{ xs: 'column-reverse', md: 'row' }} spacing={2}>
                     <Box sx={{ flexBasis: 0, flexGrow: 3 }}>
@@ -122,7 +105,7 @@ export default function ProductDetails() {
                         </Typography>
                         <ul style={{ margin: "10px 0px" }}>
                             {
-                                product?.highlights?.map((list, index) => {
+                                highlights?.map((list, index) => {
                                     return (
                                         <li key={`${list}${index}`} ><Typography variant='body2'>
                                             {list}
@@ -142,7 +125,7 @@ export default function ProductDetails() {
                             {product?.price}
                         </Typography>
                         <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center", marginBottom: "10px" }}>
-                            <Rating name="half-rating-read" defaultValue={reviews?.average} precision={0.5} readOnly />
+                            <Rating name="half-rating-read" defaultValue={product?.rating} precision={0.5} readOnly />
                             <Typography variant='body' sx={{ marginLeft: "10px" }}>{reviews?.totalCount} reviews</Typography>
                         </Box>
                         <FormControl>
@@ -155,7 +138,7 @@ export default function ProductDetails() {
 
                             >
                                 {
-                                    product?.colors?.map((obj, index) => {
+                                    colors?.map((obj, index) => {
                                         return (
                                             <FormControlLabel value={obj?.name} control={<Radio />} label={obj?.name} />
                                         )
@@ -168,7 +151,7 @@ export default function ProductDetails() {
                         <Typography variant='h6' gutterBottom>Size</Typography>
                         <Grid container spacing={2}>
                             {
-                                product?.sizes?.map((obj, index) => {
+                                sizes?.map((obj, index) => {
                                     return (<Grid key={`${obj.name}${index}`} item xs={3} onClick={() => {
                                         setselectSize(obj.name)
                                     }} >

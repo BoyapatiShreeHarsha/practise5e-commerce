@@ -9,6 +9,13 @@ export function fetchAllProducts() {
     );
 }
 
+export function fetchProduct(id) {
+    return new Promise(async (resolve) => {
+        const response = await axios.get(`/products/${id}`);
+        resolve(response)
+    }
+    );
+}
 
 export function fetchProductsByFilters(filter, sort, page) {
     // filter = {"category":["smartphone","laptops"]}
@@ -33,7 +40,6 @@ export function fetchProductsByFilters(filter, sort, page) {
 
     return new Promise(async (resolve) => {
         const response = await axios.get('/products?' + queryString);
-        console.log(queryString);
         const totalItems = response.data.length;
         // we have to send the data here
         resolve({ data: { products: response.data, totalItems: totalItems } })
