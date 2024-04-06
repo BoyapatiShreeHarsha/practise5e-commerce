@@ -17,12 +17,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/product-details" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/cart' element={<CartPage />} />
         <Route path='/checkout' element={<Checkout />} />
-        <Route path='/' element={<ProductDetailsPage />} />
+        <Route path='/product-details' element={<ProductDetailsPage />} />
       </Routes>
     </BrowserRouter>
   )

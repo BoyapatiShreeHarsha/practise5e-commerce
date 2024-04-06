@@ -16,7 +16,7 @@ import { Badge, Divider, Stack } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
 import { customButton } from "../../../utils/muiCustomComponents";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Your Profile", "Settings", "Logout"];
@@ -42,49 +42,53 @@ function ResponsiveAppBar() {
         setAnchorElUser(null);
     };
 
+    const navigate = useNavigate();
+
     return (
         <Box>
             <AppBar position="static" sx={{ bgcolor: "rgb(31, 41, 55)" }}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="a"
-                            href="#app-bar-with-responsive-menu"
-                            sx={{
-                                mr: 2,
-                                display: { xs: "none", md: "flex" },
-                                fontFamily: "monospace",
-                                fontWeight: 700,
-                                letterSpacing: ".3rem",
-                                color: "inherit",
-                                textDecoration: "none",
-                            }}
-                        >
-                            LOGO
-                        </Typography>
+                        <Box onClick={() => navigate("/")} sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
+                            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="a"
+                                href="/"
+                                sx={{
+                                    mr: 2,
+                                    display: { xs: "none", md: "flex" },
+                                    fontFamily: "monospace",
+                                    fontWeight: 700,
+                                    letterSpacing: ".3rem",
+                                    color: "inherit",
+                                    textDecoration: "none",
+                                }}
+                            >
+                                LOGO
+                            </Typography>
 
-                        <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-                        <Typography
-                            variant="h5"
-                            noWrap
-                            component="a"
-                            href="#app-bar-with-responsive-menu"
-                            sx={{
-                                mr: 2,
-                                display: { xs: "flex", md: "none" },
-                                flexGrow: 1,
-                                fontFamily: "monospace",
-                                fontWeight: 700,
-                                letterSpacing: ".3rem",
-                                color: "inherit",
-                                textDecoration: "none",
-                            }}
-                        >
-                            LOGO
-                        </Typography>
+                            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+                            <Typography
+                                variant="h5"
+                                noWrap
+                                component="a"
+                                href="/"
+                                sx={{
+                                    mr: 2,
+                                    display: { xs: "flex", md: "none" },
+                                    flexGrow: 1,
+                                    fontFamily: "monospace",
+                                    fontWeight: 700,
+                                    letterSpacing: ".3rem",
+                                    color: "inherit",
+                                    textDecoration: "none",
+                                }}
+                            >
+                                LOGO
+                            </Typography>
+                        </Box>
                         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                             {pages.map((page, index) => (
                                 <p key={index}>{customButton({
