@@ -8,6 +8,9 @@ import { rowDivider } from '../utils/muiCustomComponents';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ProductList from '../features/product/components/ProductList';
 import CloseIcon from '@mui/icons-material/Close';
+import { ITEMS_PER_PAGE } from '../app/contants';
+import { selectTotalItems } from '../features/product/productSlice';
+import { useSelector } from 'react-redux';
 
 
 const sortingList = [
@@ -182,6 +185,11 @@ const filters = [
 ];
 
 export default function Home() {
+    const [page, setPage] = useState(1);
+    const [openFilter, setOpenFilter] = useState(false);
+    const TOTAL_ITEMS = useSelector(selectTotalItems);
+
+    const [filterState, setFilterState] = useState({});
     // for sort menu
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -209,16 +217,17 @@ export default function Home() {
 
 
     // pagination
-    const [page, setPage] = useState(1);
-    const handlePageChange = (value) => {
+
+    const handlePageChange = (event, value) => {
         setPage(value);
     };
 
+    useEffect(() => {
+        setPage(1);
+    }, [filterState, sortState])
+
+
     // filters
-
-    const [openFilter, setOpenFilter] = useState(false);
-
-    const [filterState, setFilterState] = useState({});
 
     function handleFilter(state, category, index) {
         //change the value in our local data 
@@ -268,13 +277,13 @@ export default function Home() {
                     <Box className={styles.middleBox}>
                         <DesktopFilter handleFilter={handleFilter} filterState={filterState} />
                         {/* main products display */}
-                        <Box sx={{ flexGrow: 7 }}><ProductList filterState={filterState} sortState={sortState} /></Box>
+                        <Box sx={{ flexGrow: 7 }}><ProductList filterState={filterState} sortState={sortState} page={page} /></Box>
                     </Box>
                     {/* bottom section */}
                     {rowDivider({ node: { margin: "20px 0px" } })}
                     <Stack justifyContent={'space-between'} direction={'row'}>
                         <Typography>Page: {page}</Typography>
-                        <Pagination count={5} page={page} onChange={handlePageChange} />
+                        <Pagination count={Math.ceil(TOTAL_ITEMS / ITEMS_PER_PAGE)} page={page} onChange={handlePageChange} />
                     </Stack>
                 </Paper>
             </Box >

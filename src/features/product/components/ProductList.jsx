@@ -2,24 +2,30 @@ import { Box, Card, CardContent, CardMedia, Grid, Rating, Stack, Typography } fr
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchAllProductsAsync, fetchProductsByFiltersAsync, selectAllProducts } from '../productSlice';
+import { fetchProductsByFiltersAsync, selectAllProducts } from '../productSlice';
+import { ITEMS_PER_PAGE } from '../../../app/contants';
 
 
 
 
-export default function ProductList({ filterState, sortState }) {
+export default function ProductList({ filterState, sortState, page }) {
     const dispatch = useDispatch();
     const products = useSelector(selectAllProducts);
+    console.log(products);
 
     useEffect(() => {
-        dispatch(fetchProductsByFiltersAsync({ filterState, sortState }));
-    }, [filterState, sortState])
+        let pageState = {
+            _page: page,
+            _limit: ITEMS_PER_PAGE
+        }
+        dispatch(fetchProductsByFiltersAsync({ filterState, sortState, pageState }));
+    }, [filterState, sortState, page])
 
 
     const navigate = useNavigate();
     return (
         <Grid container spacing={2} sx={{ paddingLeft: "10px" }}>
-            {products.map((product, index) => {
+            {products.length > 0 && products.map((product, index) => {
                 return (<Grid key={product?.id} item xs={12} sm={6} md={4}>
                     <Card onClick={() => {
                         navigate('/product-details');
@@ -35,7 +41,7 @@ export default function ProductList({ filterState, sortState }) {
                                     {product?.title}
                                 </Typography>
                                 <Typography variant='body1' sx={{ margin: "auto 0px" }}>
-                                    ${Math.round(product.price * ((100 - product?.discountPercentage) / 100))}
+                                    ${Math.round(product?.price * ((100 - product?.discountPercentage) / 100))}
                                 </Typography>
                             </Stack>
                             <Stack justifyContent={'space-between'} direction={'row'}>
@@ -46,14 +52,14 @@ export default function ProductList({ filterState, sortState }) {
                                     </Typography>
                                 </Box>
                                 <Typography variant='body2' sx={{ textDecoration: 'line-through' }}>
-                                    ${product.price}
+                                    ${product?.price}
                                 </Typography>
                             </Stack>
                         </CardContent>
                     </Card>
                 </Grid>)
-            })
-            }
+            })}
+
         </Grid>
     )
 }
