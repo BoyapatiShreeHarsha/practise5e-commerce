@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ProductList from '../features/product/components/ProductList';
 import CloseIcon from '@mui/icons-material/Close';
 import { ITEMS_PER_PAGE } from '../app/contants';
-import { fetchAllBrandsAsync, fetchAllCategoriesAsync, selectBrands, selectCategories, selectTotalItems } from '../features/product/productSlice';
+import { fetchAllBrandsAsync, fetchAllCategoriesAsync, selectBrands, selectCategories, selectPages, selectTotalItems } from '../features/product/productSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -28,6 +28,7 @@ export default function Home() {
     const [filters, setFilters] = useState([]);
     const categories = useSelector(selectCategories);
     const brands = useSelector(selectBrands);
+    const totalPages = useSelector(selectPages);
 
     useEffect(() => {
         dispatch(fetchAllCategoriesAsync());
@@ -155,7 +156,7 @@ export default function Home() {
                     {rowDivider({ node: { margin: "20px 0px" } })}
                     <Stack justifyContent={'space-between'} direction={'row'}>
                         <Typography>Page: {page}</Typography>
-                        <Pagination count={Math.ceil(TOTAL_ITEMS / ITEMS_PER_PAGE)} page={page} onChange={handlePageChange} />
+                        <Pagination count={totalPages} page={page} onChange={handlePageChange} />
                     </Stack>
                 </Paper>
             </Box >

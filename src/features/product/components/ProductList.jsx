@@ -15,7 +15,7 @@ export default function ProductList({ filterState, sortState, page }) {
     useEffect(() => {
         let pageState = {
             _page: page,
-            _limit: ITEMS_PER_PAGE
+            _per_page: ITEMS_PER_PAGE
         }
         dispatch(fetchProductsByFiltersAsync({ filterState, sortState, pageState }));
     }, [filterState, sortState, page])

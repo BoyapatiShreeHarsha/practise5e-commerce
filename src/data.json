@@ -2235,5 +2235,12 @@
             "value": "YIOSI",
             "label": "YIOSI"
         }
+    ],
+    "users": [
+        {
+            "id": "e5f6",
+            "email": "test@gmail.com",
+            "password": "Dog@2002"
+        }
     ]
 }

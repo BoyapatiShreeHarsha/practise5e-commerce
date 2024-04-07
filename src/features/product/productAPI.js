@@ -20,7 +20,7 @@ export function fetchProduct(id) {
 export function fetchProductsByFilters(filter, sort, page) {
     // filter = {"category":["smartphone","laptops"]}
     // sort = {_sort:"price",_order="desc"}
-    // pagination = {_page:1,_limit=10}.
+    // pagination = {_page:1,_per_page=12}.
     // TODO : on server we will support multi values in filter
     // TODO : pagination on server
 
@@ -34,15 +34,15 @@ export function fetchProductsByFilters(filter, sort, page) {
         queryString += `${key}=${sort[key]}&`
     }
     for (let key in page) {
-
         queryString += `${key}=${page[key]}&`
     }
 
     return new Promise(async (resolve) => {
         const response = await axios.get('/products?' + queryString);
-        const totalItems = response.data.length;
+        const totalItems = response.data.items;
+        const totalPages = response.data.pages;
         // we have to send the data here
-        resolve({ data: { products: response.data, totalItems: totalItems } })
+        resolve({ data: { products: response.data.data, totalItems: totalItems, totalPages: totalPages } })
     }
     );
 }
@@ -59,7 +59,6 @@ export function fetchAllCategories() {
 export function fetchAllBrands() {
     return new Promise(async (resolve) => {
         const response = await axios.get('/brands');
-        // console.log(response);
         resolve(response)
     }
     );

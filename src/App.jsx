@@ -11,18 +11,19 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import Protected from './features/auth/components/Protected';
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Protected><Home /></Protected>} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/cart' element={<CartPage />} />
-        <Route path='/checkout' element={<Checkout />} />
-        <Route path='/product-details/:id' element={<ProductDetailsPage />} />
+        <Route path='/cart' element={<Protected><CartPage /></Protected>} />
+        <Route path='/checkout' element={<Protected><Checkout /></Protected>} />
+        <Route path='/product-details/:id' element={<Protected><ProductDetailsPage /></Protected>} />
       </Routes>
     </BrowserRouter>
   )

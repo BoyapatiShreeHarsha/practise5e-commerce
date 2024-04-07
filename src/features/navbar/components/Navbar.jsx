@@ -19,7 +19,11 @@ import { customButton } from "../../../utils/muiCustomComponents";
 import { Link, useNavigate } from "react-router-dom";
 
 const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Your Profile", "Settings", "Logout"];
+const settings = [
+    { name: "Your Profile", link: "/" },
+    { name: "Settings", link: "/" },
+    { name: "Logout", link: "/login" }
+]
 
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(false);
@@ -134,9 +138,9 @@ function ResponsiveAppBar() {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
+                                {settings.map((setting, index) => (
+                                    <MenuItem key={`setting${index}`} onClick={handleCloseUserMenu}>
+                                        <Link to={setting.to} style={{ textDecoration: "none", color: "black" }}><Typography textAlign="center">{setting.name}</Typography></Link>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -199,15 +203,15 @@ function ResponsiveAppBar() {
                 <Stack spacing={1}>
                     {
                         settings.map((setting, index) => {
-                            return customButton({
-                                label: setting,
+                            return (<Link key={`setting-${index}`} to={setting.to} style={{ width: "100%" }}>{customButton({
+                                label: setting.name,
                                 propsToBePassed: {
                                     variant: "contained",
                                     key: index,
-                                    sx: { justifyContent: "flex-start", bgcolor: "rgb(31, 41, 55)" }
+                                    sx: { justifyContent: "flex-start", bgcolor: "rgb(31, 41, 55)", width: "100%" }
                                 },
                                 classprops: { hover_background_color: "rgb(55, 65, 81)" }
-                            })
+                            })}</Link>)
                         })
                     }
                 </Stack>
