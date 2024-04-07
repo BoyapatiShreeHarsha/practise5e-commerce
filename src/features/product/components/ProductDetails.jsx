@@ -63,7 +63,9 @@ export default function ProductDetails() {
 
     function handleAddBtn() {
         if (product.id && user.id) {
-            dispatch(addToCartAsync({ ...product, quantity: 1, user: user.id }))
+            let newProduct = { ...product };
+            delete newProduct.id;
+            dispatch(addToCartAsync({ ...newProduct, quantity: 1, user: user.id }))
         }
     }
 

@@ -31,3 +31,17 @@ export function checkUser(loginData) {
 
     });
 }
+
+export function updateUser(userData) {
+    let data = JSON.stringify(userData);
+    return new Promise(async (resolve) => {
+        const response = await axios.patch(`/users/${userData.id}`, data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        // console.log(response);
+        resolve(response)
+    }
+    );
+}
