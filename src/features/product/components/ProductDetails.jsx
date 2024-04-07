@@ -6,6 +6,8 @@ import styles from './ProductDetails.module.css'
 import { borderColor } from '../../../utils/platfromThemes'
 import { useParams } from 'react-router-dom'
 import { fetchProductAsync, selectProduct } from '../productSlice';
+import { addToCartAsync } from '../../cart/cartSlice';
+import { selectLoggedInUser } from '../../auth/authSlice';
 
 
 let highlights = [
@@ -38,6 +40,7 @@ export default function ProductDetails() {
     const params = useParams();
     const product = useSelector(selectProduct);
     const dispatch = useDispatch();
+    const user = useSelector(selectLoggedInUser);
     const handleChangeColor = (event) => {
         setColor(event.target.value);
     };
@@ -57,6 +60,12 @@ export default function ProductDetails() {
         let id = params.id;
         dispatch(fetchProductAsync({ id }));
     }, [params.id])
+
+    function handleAddBtn() {
+        if (product.id && user.id) {
+            dispatch(addToCartAsync({ ...product, quantity: 1, user: user.id }))
+        }
+    }
 
 
     const [selectSize, setselectSize] = useState(sizes?.[firstIndex]?.name);
@@ -98,7 +107,7 @@ export default function ProductDetails() {
                 <Stack direction={{ xs: 'column-reverse', md: 'row' }} spacing={2}>
                     <Box sx={{ flexBasis: 0, flexGrow: 3 }}>
                         <Typography variant='h6' gutterBottom>
-                            {product?.description}
+                            {product.description}
                         </Typography>
                         <Typography variant='h6'>
                             Highlights
@@ -116,13 +125,13 @@ export default function ProductDetails() {
                         </ul>
                         <Typography variant='h6' gutterBottom>Details</Typography>
                         <Typography variant='body'>
-                            {product?.details}
+                            {product.details}
                         </Typography>
                     </Box>
                     <Box sx={{ display: { xs: "none", md: "block", borderLeft: `1px solid ${borderColor}` } }}></Box>
                     <Box sx={{ flexBasis: 0, flexGrow: 2 }}>
                         <Typography variant='h5' gutterBottom>
-                            {product?.price}
+                            $ {Math.round((1 - ((product?.discountPercentage) / 100)) * product?.price)}
                         </Typography>
                         <Box sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center", marginBottom: "10px" }}>
                             <Rating name="half-rating-read" defaultValue={product?.rating} precision={0.5} readOnly />
@@ -140,7 +149,7 @@ export default function ProductDetails() {
                                 {
                                     colors?.map((obj, index) => {
                                         return (
-                                            <FormControlLabel value={obj?.name} control={<Radio />} label={obj?.name} />
+                                            <FormControlLabel key={`color${index}`} value={obj?.name} control={<Radio />} label={obj?.name} />
                                         )
                                     })
                                 }
@@ -162,7 +171,7 @@ export default function ProductDetails() {
                                 })
                             }
                         </Grid>
-                        <Button variant='contained' sx={{ margin: "15px", width: "100%" }}>Add to Cart</Button>
+                        <Button onClick={handleAddBtn} variant='contained' sx={{ margin: "15px", width: "100%" }}>Add to Cart</Button>
                     </Box>
                 </Stack>
             </Paper>

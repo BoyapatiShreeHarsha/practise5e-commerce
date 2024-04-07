@@ -25,7 +25,6 @@ export default function Login() {
 
     const theme = useTheme();
     return (
-
         <ThemeProvider theme={theme}>
             {user && <Navigate to="/" replace={true}></Navigate>}
             <Box sx={{ height: "100vh", bgcolor: "rgb(243 244 246)", width: "100%", padding: "30px 0px" }}>

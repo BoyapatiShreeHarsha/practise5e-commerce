@@ -24,7 +24,7 @@ export function checkUser(loginData) {
         })
 
         if (data.length > 0) {
-            resolve({ data });
+            resolve({ data: data[0] });
         }
 
         reject({ message: 'user not found' });

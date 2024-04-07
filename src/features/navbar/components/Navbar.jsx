@@ -17,6 +17,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
 import { customButton } from "../../../utils/muiCustomComponents";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTotalCartItems } from "../../cart/cartSlice";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = [
@@ -29,6 +31,8 @@ function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(false);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [active, setActive] = React.useState("");
+    const cartItemsCount = useSelector(selectTotalCartItems);
+
 
     const handleActive = (value) => {
         setActive(prev => value)
@@ -113,9 +117,9 @@ function ResponsiveAppBar() {
 
                         <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" }, justifyContent: "flex-end", alignItems: "center" }}>
                             <Link to={'/cart'} style={{ color: "white" }}>
-                                <Badge badgeContent={4} color="primary" sx={{ marginRight: "20px" }}>
+                                {cartItemsCount > 0 && <Badge badgeContent={cartItemsCount} color="primary" sx={{ marginRight: "20px" }}>
                                     <ShoppingCartIcon />
-                                </Badge>
+                                </Badge>}
                             </Link>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -195,9 +199,9 @@ function ResponsiveAppBar() {
                         </Box>
                     </Box>
                     <Link to={'/cart'} style={{ color: "white" }}>
-                        <Badge badgeContent={4} color="primary">
+                        {cartItemsCount > 0 && <Badge badgeContent={cartItemsCount} color="primary">
                             <ShoppingCartIcon />
-                        </Badge>
+                        </Badge>}
                     </Link>
                 </Box>
                 <Stack spacing={1}>
