@@ -8,7 +8,7 @@ import { Link, Navigate } from 'react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { deleteItemFromCartAsync, selectCartItems } from '../cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
-import { createOrderAsync } from '../../order/orderSlice';
+import { CurrentOrder, createOrderAsync } from '../../order/orderSlice';
 
 
 
@@ -16,6 +16,7 @@ export default function Cart({ section, paymentType, address }) {
     const products = useSelector(selectCartItems);
     const dispatch = useDispatch();
     const user = useSelector(selectLoggedInUser);
+    const currentOrder = useSelector(CurrentOrder);
 
     const TotalSum = products.reduce(
         (total, item) => total + (Math.round((1 - (item.discountPercentage / 100)) * item.price) * item.quantity),
@@ -28,13 +29,14 @@ export default function Cart({ section, paymentType, address }) {
     );
 
     function handleOrder() {
-        const order = { items: products, totalAmount: TotalSum, totalItems: TotalItems, user, paymentMethod: paymentType, selectedAddress: address };
+        const order = { items: products, totalAmount: TotalSum, totalItems: TotalItems, user, paymentMethod: paymentType, selectedAddress: address, status: "pending" };
         dispatch(createOrderAsync(order));
     }
 
 
     return (
         <>
+            {currentOrder && <Navigate to={`/order-succes/${currentOrder.id}`} replace={true}></Navigate>}
             {!products.length && <Navigate to="/" replace={true}></Navigate>}
             <Box sx={{ bgcolor: "rgb(243 244 246)", height: "100vh", position: "relative" }}>
                 <Paper elevation={3} className={styles.paperComponent}>

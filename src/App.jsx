@@ -16,6 +16,9 @@ import Protected from './features/auth/components/Protected';
 import { selectLoggedInUser } from './features/auth/authSlice';
 import { useEffect } from 'react';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
+import PageNotFound from './pages/PageNotFound';
+import OrderSuccess from './pages/OrderSuccess';
+import UserOrdersPage from './pages/UserOrdersPage';
 
 function App() {
 
@@ -37,6 +40,9 @@ function App() {
         <Route path='/cart' element={<Protected><CartPage /></Protected>} />
         <Route path='/checkout' element={<Protected><Checkout /></Protected>} />
         <Route path='/product-details/:id' element={<Protected><ProductDetailsPage /></Protected>} />
+        <Route path='/order-succes/:id' element={<OrderSuccess />} />
+        <Route path='/user-orders' element={<UserOrdersPage />} />
+        <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   )

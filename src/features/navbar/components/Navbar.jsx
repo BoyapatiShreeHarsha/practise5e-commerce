@@ -23,6 +23,7 @@ import { selectTotalCartItems } from "../../cart/cartSlice";
 const pages = ["Products", "Pricing", "Blog"];
 const settings = [
     { name: "Your Profile", link: "/" },
+    { name: "Your Orders", link: "/user-orders" },
     { name: "Settings", link: "/" },
     { name: "Logout", link: "/login" }
 ]
@@ -144,7 +145,7 @@ function ResponsiveAppBar() {
                             >
                                 {settings.map((setting, index) => (
                                     <MenuItem key={`setting${index}`} onClick={handleCloseUserMenu}>
-                                        <Link to={setting.to} style={{ textDecoration: "none", color: "black" }}><Typography textAlign="center">{setting.name}</Typography></Link>
+                                        <Link to={setting.link} style={{ textDecoration: "none", color: "black" }}><Typography textAlign="center">{setting.name}</Typography></Link>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -207,7 +208,7 @@ function ResponsiveAppBar() {
                 <Stack spacing={1}>
                     {
                         settings.map((setting, index) => {
-                            return (<Link key={`setting-${index}`} to={setting.to} style={{ width: "100%" }}>{customButton({
+                            return (<Link key={`setting-${index}`} to={setting.link} style={{ width: "100%" }}>{customButton({
                                 label: setting.name,
                                 propsToBePassed: {
                                     variant: "contained",

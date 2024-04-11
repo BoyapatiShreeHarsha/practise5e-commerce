@@ -60,3 +60,18 @@
     justify-content: space-between;
     align-items: center;
 }
+
+
+.addBoxMain {
+    border: 1px solid rgb(229 231 235);
+    display: flex;
+    align-items: center;
+    padding: 5% 2%;
+    margin-top: 2%;
+}
+
+.addBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: top;
+}

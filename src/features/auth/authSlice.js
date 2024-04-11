@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export const createUserAsync = createAsyncThunk(
-    'user/createUser',
+    'auth/createUser',
     async (userData) => {
         const response = await createUser(userData);
         // The value we return becomes the `fulfilled` action payload
@@ -18,7 +18,7 @@ export const createUserAsync = createAsyncThunk(
 );
 
 export const checkUserAsync = createAsyncThunk(
-    'user/checkUser',
+    'auth/checkUser',
     async (userData) => {
         const response = await checkUser(userData);
         // The value we return becomes the `fulfilled` action payload
@@ -27,7 +27,7 @@ export const checkUserAsync = createAsyncThunk(
 );
 
 export const updateUserAsync = createAsyncThunk(
-    'user/updateUser',
+    'auth/updateUser',
     async (userData) => {
         const response = await updateUser(userData);
         // The value we return becomes the `fulfilled` action payload
@@ -36,7 +36,7 @@ export const updateUserAsync = createAsyncThunk(
 );
 
 export const authSlice = createSlice({
-    name: 'user',
+    name: 'auth',
     initialState,
     reducers: {
         increment: (state) => {

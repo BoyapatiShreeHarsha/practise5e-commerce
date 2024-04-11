@@ -3,7 +3,8 @@ import { createOrder } from './orderAPI';
 
 const initialState = {
     orders: [],
-    status: 'idle'
+    status: 'idle',
+    currentOrder: null,
 };
 
 
@@ -23,6 +24,9 @@ export const orderSlice = createSlice({
         increment: (state) => {
             state.value += 1;
         },
+        resetCurrOrder: (state) => {
+            state.currentOrder = null;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -32,10 +36,15 @@ export const orderSlice = createSlice({
             .addCase(createOrderAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
                 state.orders.push(action.payload);
+                state.currentOrder = action.payload;
             });
     },
 });
 
 // export const selectCartItems = (state) => state.cart.items;
+
+export const CurrentOrder = (state) => state.order.currentOrder;
+
+export const { resetCurrOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;
