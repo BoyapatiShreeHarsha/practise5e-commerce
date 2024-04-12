@@ -5,8 +5,8 @@ import Cart from '../features/cart/components/Cart'
 import styles from './Checkout.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { customTextFeild, rowDivider } from '../utils/muiCustomComponents'
-import { selectLoggedInUser, updateUserAsync } from '../features/auth/authSlice'
-import { selectCartItems } from '../features/cart/cartSlice'
+import { selectCurrUser } from '../features/user/userSlice'
+import { updateUserAsync } from '../features/user/userSlice'
 
 
 
@@ -20,7 +20,8 @@ export default function Checkout() {
     const [paymentType, setPaymentType] = useState(0);
 
 
-    const user = useSelector(selectLoggedInUser);
+    const user = useSelector(selectCurrUser);
+
     const dispatch = useDispatch();
 
     const {
@@ -174,7 +175,7 @@ export default function Checkout() {
                 </Paper>
             </Box>
             <Box sx={{ flexGrow: 1 }}>
-                <Cart section={"checkout"} paymentType={paymentMode[paymentType].value} address={user.addresses[selectedAdd]} />
+                <Cart section={"checkout"} paymentType={paymentMode[paymentType].value} address={user?.addresses[selectedAdd]} />
             </Box>
         </Stack>
     )

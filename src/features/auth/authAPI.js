@@ -10,7 +10,7 @@ export function createUser(userData) {
             }
         });
         // console.log(response);
-        resolve(response)
+        resolve({ data: response.data.id })
     }
     );
 }
@@ -24,24 +24,10 @@ export function checkUser(loginData) {
         })
 
         if (data.length > 0) {
-            resolve({ data: data[0] });
+            resolve({ data: data[0].id });
         }
 
         reject({ message: 'user not found' });
 
     });
-}
-
-export function updateUser(userData) {
-    let data = JSON.stringify(userData);
-    return new Promise(async (resolve) => {
-        const response = await axios.patch(`/users/${userData.id}`, data, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        // console.log(response);
-        resolve(response)
-    }
-    );
 }

@@ -5,7 +5,7 @@ import React from 'react'
 import { ThemeProvider } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 import { Link, Navigate } from 'react-router-dom'
-import { checkUserAsync, selectLogInError, selectLoggedInUser } from '../authSlice';
+import { checkUserAsync, selectLogInError, selectLoggedInUserId } from '../authSlice';
 
 export default function Login() {
     const {
@@ -20,7 +20,7 @@ export default function Login() {
         dispatch(checkUserAsync(data));
     }
 
-    const user = useSelector(selectLoggedInUser);
+    const user = useSelector(selectLoggedInUserId);
     const Loginerror = useSelector(selectLogInError);
 
     const theme = useTheme();

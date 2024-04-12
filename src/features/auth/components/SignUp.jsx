@@ -5,7 +5,7 @@ import React from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
-import { createUserAsync, selectLoggedInUser } from '../authSlice';
+import { createUserAsync, selectLoggedInUserId } from '../authSlice';
 
 export default function SignUp() {
     const {
@@ -15,7 +15,7 @@ export default function SignUp() {
     } = useForm();
 
     const dispatch = useDispatch();
-    const user = useSelector(selectLoggedInUser);
+    const user = useSelector(selectLoggedInUserId);
 
 
     const funcSubmit = (data) => {

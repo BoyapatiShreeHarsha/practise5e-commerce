@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { Box, Button, Paper, Stack, Typography } from '@mui/material'
+import { Box, Paper, Stack, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserOrdersByIdAsync, selectUserOrders } from '../userSlice';
-import { selectLoggedInUser } from '../../auth/authSlice';
+import { selectLoggedInUserId } from '../../auth/authSlice';
 import styles from '../../cart/components/Cart.module.css';
 import { rowDivider } from '../../../utils/muiCustomComponents';
 
@@ -12,11 +12,11 @@ export default function UserOrders() {
 
     const userOrders = useSelector(selectUserOrders);
     const dispatch = useDispatch();
-    const user = useSelector(selectLoggedInUser);
+    const user = useSelector(selectLoggedInUserId);
 
     useEffect(() => {
-        if (user?.id) {
-            dispatch(fetchUserOrdersByIdAsync(user.id));
+        if (user) {
+            dispatch(fetchUserOrdersByIdAsync(user));
         }
     }, [user])
 
@@ -32,8 +32,10 @@ export default function UserOrders() {
                     return (
                         <Paper key={`userOrder-${index}`} elevation={3} className={styles.paperComponent} sx={{ marginBottom: "30px" }}>
                             <Box className={styles.topBox}>
-                                <Typography variant='h6'>Order #{userOrder.id}</Typography>
+                                <Typography variant='h6' gutterBottom>Order #{userOrder.id}</Typography>
+                                <Typography variant='body'>Order status : {userOrder.status}</Typography>
                             </Box>
+
                             {rowDivider({ node: { margin: "20px 0px" } })}
                             {userOrder?.items?.map((ele) => {
                                 return (

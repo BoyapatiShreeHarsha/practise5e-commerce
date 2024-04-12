@@ -19,10 +19,11 @@ import { customButton } from "../../../utils/muiCustomComponents";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTotalCartItems } from "../../cart/cartSlice";
+import { selectCurrUser } from "../../user/userSlice";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = [
-    { name: "Your Profile", link: "/" },
+    { name: "Your Profile", link: "/user-profile" },
     { name: "Your Orders", link: "/user-orders" },
     { name: "Settings", link: "/" },
     { name: "Logout", link: "/login" }
@@ -33,6 +34,8 @@ function ResponsiveAppBar() {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [active, setActive] = React.useState("");
     const cartItemsCount = useSelector(selectTotalCartItems);
+
+    const userInfo = useSelector(selectCurrUser);
 
 
     const handleActive = (value) => {
@@ -124,7 +127,7 @@ function ResponsiveAppBar() {
                             </Link>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                                    <Avatar alt={userInfo.uname} >{userInfo.uname ? userInfo.uname[0] : '?'}</Avatar>
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -192,11 +195,11 @@ function ResponsiveAppBar() {
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", color: "white", margin: "0 24px 15px 8px" }}>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                         <IconButton>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            <Avatar alt={userInfo.uname}>{userInfo.uname ? userInfo.uname[0] : '?'}</Avatar>
                         </IconButton>
                         <Box>
-                            <p>User Name</p>
-                            <p>useremail@gmail.com</p>
+                            <p>{userInfo.uname}</p>
+                            <p>{userInfo.email}</p>
                         </Box>
                     </Box>
                     <Link to={'/cart'} style={{ color: "white" }}>

@@ -39,10 +39,16 @@ export function updateCart(ItemsData) {
 
 export function deleteItemFromCart(ItemId) {
     return new Promise(async (resolve) => {
-        const response = await axios.delete(`/carts/${ItemId}`);
-        // console.log(response.data);
+        try {
+            const response = await axios.delete(`/carts/${ItemId}`);
+            // console.log(response.data);
 
-        resolve({ data: response.data.id })
+            resolve({ data: response.data.id })
+        } catch (error) {
+            console.log(error);
+            resolve({ data: ItemId })
+        }
+
     }
     );
 }
@@ -51,8 +57,14 @@ export function resetCart(userId) {
     return new Promise(async (resolve, reject) => {
         try {
             const response = await fetchItemsByUserId(userId);
+
+            let deleteItem = {};
             for (let obj of response.data) {
-                await deleteItemFromCart(obj.id);
+                if (!deleteItem.hasOwnProperty(obj.id)) {
+                    deleteItem[obj.id] = 'true';
+
+                    await deleteItemFromCart(obj.id);
+                }
             }
             resolve({ status: "successful" });
         } catch (error) {

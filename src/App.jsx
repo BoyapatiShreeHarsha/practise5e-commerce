@@ -13,21 +13,24 @@ import {
   Route
 } from "react-router-dom";
 import Protected from './features/auth/components/Protected';
-import { selectLoggedInUser } from './features/auth/authSlice';
+import { selectLoggedInUserId } from './features/auth/authSlice';
 import { useEffect } from 'react';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import PageNotFound from './pages/PageNotFound';
 import OrderSuccess from './pages/OrderSuccess';
 import UserOrdersPage from './pages/UserOrdersPage';
+import UserProfilePage from './pages/UserProfilePage';
+import { fetchUserDataAsync } from './features/user/userSlice';
 
 function App() {
 
-  const user = useSelector(selectLoggedInUser);
+  const user = useSelector(selectLoggedInUserId);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (user) {
-      dispatch(fetchItemsByUserIdAsync(user.id));
+      dispatch(fetchItemsByUserIdAsync(user));
+      dispatch(fetchUserDataAsync(user));
     }
   }, [dispatch, user])
 
@@ -40,8 +43,9 @@ function App() {
         <Route path='/cart' element={<Protected><CartPage /></Protected>} />
         <Route path='/checkout' element={<Protected><Checkout /></Protected>} />
         <Route path='/product-details/:id' element={<Protected><ProductDetailsPage /></Protected>} />
-        <Route path='/order-succes/:id' element={<OrderSuccess />} />
-        <Route path='/user-orders' element={<UserOrdersPage />} />
+        <Route path='/order-succes/:id' element={<Protected><OrderSuccess /></Protected>} />
+        <Route path='/user-orders' element={<Protected><UserOrdersPage /></Protected>} />
+        <Route path='/user-profile' element={<Protected><UserProfilePage /></Protected>} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

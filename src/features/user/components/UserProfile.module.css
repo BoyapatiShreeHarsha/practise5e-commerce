@@ -1,0 +1,62 @@
+.topBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.paperComponent {
+    width: 90%;
+    margin: 0px auto;
+    padding: 2% 4%;
+
+}
+
+.flexRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.addBoxMain {
+    margin: 10px auto;
+}
+
+.addBox {
+    border: 1px solid rgb(229 231 235);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.box1 {
+    width: 100%;
+}
+
+.box2 {
+    width: 60%;
+}
+
+.box3 {
+    width: 50%;
+}
+
+.formChild {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}

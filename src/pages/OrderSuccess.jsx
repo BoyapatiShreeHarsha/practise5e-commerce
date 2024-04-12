@@ -6,17 +6,17 @@ import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { resetCartAsync } from '../features/cart/cartSlice';
 import { resetCurrOrder } from '../features/order/orderSlice';
-import { selectLoggedInUser } from '../features/auth/authSlice';
+import { selectLoggedInUserId } from '../features/auth/authSlice';
 
 export default function OrderSuccess() {
     const params = useParams();
-    const user = useSelector(selectLoggedInUser);
+    const user = useSelector(selectLoggedInUserId);
     const dispatch = useDispatch();
 
     useEffect(() => {
         if (user) {
-            dispatch(resetCartAsync(user.id));
-            resetCurrOrder();
+            dispatch(resetCartAsync(user));
+            dispatch(resetCurrOrder());
         }
     }, [user])
 

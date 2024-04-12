@@ -7,7 +7,7 @@ import { borderColor } from '../../../utils/platfromThemes'
 import { useParams } from 'react-router-dom'
 import { fetchProductAsync, selectProduct } from '../productSlice';
 import { addToCartAsync } from '../../cart/cartSlice';
-import { selectLoggedInUser } from '../../auth/authSlice';
+import { selectLoggedInUserId } from '../../auth/authSlice';
 
 
 let highlights = [
@@ -40,7 +40,7 @@ export default function ProductDetails() {
     const params = useParams();
     const product = useSelector(selectProduct);
     const dispatch = useDispatch();
-    const user = useSelector(selectLoggedInUser);
+    const user = useSelector(selectLoggedInUserId);
     const handleChangeColor = (event) => {
         setColor(event.target.value);
     };
@@ -62,10 +62,10 @@ export default function ProductDetails() {
     }, [params.id])
 
     function handleAddBtn() {
-        if (product.id && user.id) {
+        if (product.id && user) {
             let newProduct = { ...product };
             delete newProduct.id;
-            dispatch(addToCartAsync({ ...newProduct, quantity: 1, user: user.id }))
+            dispatch(addToCartAsync({ ...newProduct, quantity: 1, user }))
         }
     }
 
