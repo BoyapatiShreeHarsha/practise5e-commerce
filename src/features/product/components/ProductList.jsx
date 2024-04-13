@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchProductsByFiltersAsync, selectAllProducts } from '../productSlice';
-import { ITEMS_PER_PAGE } from '../../../app/contants';
+import { ITEMS_PER_PAGE, discountedPrice } from '../../../app/contants';
 
 
 
@@ -40,7 +40,8 @@ export default function ProductList({ filterState, sortState, page }) {
                                     {product.title}
                                 </Typography>
                                 <Typography variant='body1' sx={{ margin: "auto 0px" }}>
-                                    ${Math.round(product?.price * ((100 - product?.discountPercentage) / 100))}
+
+                                    ${discountedPrice(product?.price, product?.discountPercentage)}
                                 </Typography>
                             </Stack>
                             <Stack justifyContent={'space-between'} direction={'row'}>

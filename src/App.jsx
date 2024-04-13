@@ -25,6 +25,7 @@ import { fetchUserDataAsync } from './features/user/userSlice';
 import LogOutPage from './pages/LogOutPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ProductFormPage from './pages/ProductFormPage';
+import AdminOrderPage from './pages/AdminOrderPage';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
         <Route path='/checkout' element={<Protected><Checkout /></Protected>} />
         <Route path='/product-details/:id' element={<Protected><ProductDetailsPage /></Protected>} />
         <Route path='/admin/edit-product-from/:id' element={<AdminProtected><ProductFormPage /></AdminProtected>} />
+        <Route path='/admin-orders' element={<AdminProtected><AdminOrderPage /></AdminProtected>} />
         <Route path='/order-succes/:id' element={<Protected><OrderSuccess /></Protected>} />
         <Route path='/user-orders' element={<Protected><UserOrdersPage /></Protected>} />
         <Route path='/user-profile' element={<Protected><UserProfilePage /></Protected>} />

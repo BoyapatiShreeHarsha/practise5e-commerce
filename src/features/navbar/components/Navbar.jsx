@@ -24,7 +24,8 @@ const pages = [
     { name: "Products", link: "#", role: "user" },
     { name: "Pricing", link: "#", role: "user" },
     { name: "Blog", link: "#", role: "user" },
-    { name: "Admin", link: "/admin", role: "admin" }
+    { name: "Admin", link: "/admin", role: "admin" },
+    { name: "Orders", link: "/admin-orders", role: "admin" }
 ];
 const settings = [
     { name: "Your Profile", link: "/user-profile" },

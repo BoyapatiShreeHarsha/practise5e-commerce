@@ -5,6 +5,7 @@ import { fetchUserOrdersByIdAsync, selectUserOrders } from '../userSlice';
 import { selectLoggedInUserId } from '../../auth/authSlice';
 import styles from '../../cart/components/Cart.module.css';
 import { rowDivider } from '../../../utils/muiCustomComponents';
+import { pageBackground } from '../../../utils/platfromThemes';
 
 
 
@@ -22,7 +23,7 @@ export default function UserOrders() {
 
     return (
         <div>
-            <Box sx={{ bgcolor: "rgb(243 244 246)" }}>
+            <Box sx={{ bgcolor: pageBackground }}>
                 <Box className={styles.topBox} sx={{ display: "flex", justifyContent: "center", alignContent: "center" }}>
                     <Typography variant='h5'>Your Orders</Typography>
                 </Box>

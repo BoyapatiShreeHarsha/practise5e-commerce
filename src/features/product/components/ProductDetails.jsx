@@ -6,7 +6,7 @@ import styles from './ProductDetails.module.css'
 import { borderColor } from '../../../utils/platfromThemes'
 import { useParams } from 'react-router-dom'
 import { fetchProductAsync, selectProduct } from '../productSlice';
-import { addToCartAsync } from '../../cart/cartSlice';
+import { addToCartAsync, selectCartItems } from '../../cart/cartSlice';
 import { selectLoggedInUserId } from '../../auth/authSlice';
 
 
@@ -39,6 +39,8 @@ export default function ProductDetails() {
     const [Color, setColor] = useState(colors?.[0]?.name)
     const params = useParams();
     const product = useSelector(selectProduct);
+    const cartItems = useSelector(selectCartItems);
+
     const dispatch = useDispatch();
     const user = useSelector(selectLoggedInUserId);
     const handleChangeColor = (event) => {
@@ -63,9 +65,15 @@ export default function ProductDetails() {
 
     function handleAddBtn() {
         if (product.id && user) {
+            for (let i = 0; i < cartItems.length; i++) {
+                if (+cartItems[i].productId == product.id) {
+                    alert("This Product is already present")
+                    return;
+                }
+            }
             let newProduct = { ...product };
             delete newProduct.id;
-            dispatch(addToCartAsync({ ...newProduct, quantity: 1, user }))
+            dispatch(addToCartAsync({ ...newProduct, productId: product.id, quantity: 1, user }))
         }
     }
 

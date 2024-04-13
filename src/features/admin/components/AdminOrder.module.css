@@ -1,0 +1,14 @@
+.topBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
+
+
+.paperComponent {
+    width: 90%;
+    margin: 0px auto;
+    padding: 2% 4%;
+    top: 50px;
+}

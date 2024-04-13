@@ -2382,7 +2382,17 @@
       "id": "2ebb",
       "email": "test@gmail.com2",
       "password": "Dog@2002",
-      "role": "user"
+      "role": "user",
+      "addresses": [
+        {
+          "name": "Raj",
+          "phone": "1234567890",
+          "street": "123-Main",
+          "city": "Vijayawada",
+          "state": "AP",
+          "pinCode": "112233"
+        }
+      ]
     },
     {
       "id": "e804",
@@ -2395,50 +2405,10 @@
   ],
   "carts": [
     {
-      "id": "f62d",
-      "title": "MacBook Pro",
-      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
-      "price": 1749,
-      "discountPercentage": 11.02,
-      "rating": 4.57,
-      "stock": 83,
-      "brand": "Apple",
-      "category": "laptops",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/6/thumbnail.png",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/6/1.png",
-        "https://cdn.dummyjson.com/product-images/6/2.jpg",
-        "https://cdn.dummyjson.com/product-images/6/3.png",
-        "https://cdn.dummyjson.com/product-images/6/4.jpg"
-      ],
-      "quantity": 1,
-      "user": "2ebb"
-    },
-    {
-      "id": "8d83",
-      "title": "Samsung Galaxy Book",
-      "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
-      "price": 1499,
-      "discountPercentage": 4.15,
-      "rating": 4.25,
-      "stock": 50,
-      "brand": "Samsung",
-      "category": "laptops",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg",
-      "images": [
-        "https://cdn.dummyjson.com/product-images/7/1.jpg",
-        "https://cdn.dummyjson.com/product-images/7/2.jpg",
-        "https://cdn.dummyjson.com/product-images/7/3.jpg",
-        "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
-      ],
-      "quantity": 1,
-      "user": "2ebb"
-    },
-    {
-      "id": "808a",
+      "id": "e979",
       "title": "iPhone 9",
       "description": "An apple mobile which is nothing like apple",
-      "price": 549,
+      "price": 1000,
       "discountPercentage": 12.96,
       "rating": 4.69,
       "stock": 94,
@@ -2448,13 +2418,387 @@
       "images": [
         "https://cdn.dummyjson.com/product-images/1/1.jpg",
         "https://cdn.dummyjson.com/product-images/1/2.jpg",
-        "https://cdn.dummyjson.com/product-images/1/3.jpg",
-        "https://cdn.dummyjson.com/product-images/1/4.jpg",
-        "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+        "https://cdn.dummyjson.com/product-images/1/3.jpg"
       ],
+      "delete": false,
+      "productId": "1",
+      "quantity": 1,
+      "user": "e5f6"
+    },
+    {
+      "id": "1e9d",
+      "title": "iPhone 9",
+      "description": "An apple mobile which is nothing like apple",
+      "price": 1000,
+      "discountPercentage": 12.96,
+      "rating": 4.69,
+      "stock": 94,
+      "brand": "Apple",
+      "category": "smartphones",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+      "images": [
+        "https://cdn.dummyjson.com/product-images/1/1.jpg",
+        "https://cdn.dummyjson.com/product-images/1/2.jpg",
+        "https://cdn.dummyjson.com/product-images/1/3.jpg"
+      ],
+      "delete": false,
+      "productId": "1",
+      "quantity": 1,
+      "user": "e5f6"
+    },
+    {
+      "id": "f54d",
+      "title": "iPhone 9",
+      "description": "An apple mobile which is nothing like apple",
+      "price": 1000,
+      "discountPercentage": 12.96,
+      "rating": 4.69,
+      "stock": 94,
+      "brand": "Apple",
+      "category": "smartphones",
+      "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+      "images": [
+        "https://cdn.dummyjson.com/product-images/1/1.jpg",
+        "https://cdn.dummyjson.com/product-images/1/2.jpg",
+        "https://cdn.dummyjson.com/product-images/1/3.jpg"
+      ],
+      "delete": false,
+      "productId": "1",
       "quantity": 1,
       "user": "e5f6"
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "id": "5a5b",
+      "items": [
+        {
+          "id": "808a",
+          "title": "iPhone 9",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 549,
+          "discountPercentage": 12.96,
+          "rating": 4.69,
+          "stock": 94,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/1/1.jpg",
+            "https://cdn.dummyjson.com/product-images/1/2.jpg",
+            "https://cdn.dummyjson.com/product-images/1/3.jpg",
+            "https://cdn.dummyjson.com/product-images/1/4.jpg",
+            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": "e5f6"
+        },
+        {
+          "id": "e3f7",
+          "title": "MacBook Pro",
+          "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+          "price": 1749,
+          "discountPercentage": 11.02,
+          "rating": 4.57,
+          "stock": 83,
+          "brand": "Apple",
+          "category": "laptops",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/6/thumbnail.png",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/6/1.png",
+            "https://cdn.dummyjson.com/product-images/6/2.jpg",
+            "https://cdn.dummyjson.com/product-images/6/3.png",
+            "https://cdn.dummyjson.com/product-images/6/4.jpg"
+          ],
+          "quantity": 1,
+          "user": "e5f6"
+        },
+        {
+          "id": "ec31",
+          "title": "perfume Oil",
+          "description": "Mega Discount, Impression of Acqua Di Gio by GiorgioArmani concentrated attar perfume Oil",
+          "price": 13,
+          "discountPercentage": 8.4,
+          "rating": 4.26,
+          "stock": 65,
+          "brand": "Impression of Acqua Di Gio",
+          "category": "fragrances",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/11/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/11/1.jpg",
+            "https://cdn.dummyjson.com/product-images/11/2.jpg",
+            "https://cdn.dummyjson.com/product-images/11/3.jpg",
+            "https://cdn.dummyjson.com/product-images/11/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": "e5f6"
+        }
+      ],
+      "totalAmount": 2046,
+      "totalItems": 3,
+      "user": {
+        "id": "e5f6",
+        "email": "test@gmail.com",
+        "password": "Dog@2002",
+        "addresses": [
+          {
+            "name": "harsha Boyapati",
+            "phone": "7032399999",
+            "street": "33-main ",
+            "city": "Eluru",
+            "state": "Ap",
+            "pinCode": "112233"
+          },
+          {
+            "name": "harsha",
+            "phone": "7032399999",
+            "street": "11-main ",
+            "city": "fbs",
+            "state": "Ap",
+            "pinCode": "112233"
+          }
+        ],
+        "uname": "Harsha",
+        "confirmPassword": "Dog@2002",
+        "role": "user"
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "harsha Boyapati",
+        "phone": "7032399999",
+        "street": "33-main ",
+        "city": "Eluru",
+        "state": "Ap",
+        "pinCode": "112233"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "45a8",
+      "items": [
+        {
+          "id": "8a42",
+          "title": "iPhone 9",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 1000,
+          "discountPercentage": 12.96,
+          "rating": 4.69,
+          "stock": 94,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/1/1.jpg",
+            "https://cdn.dummyjson.com/product-images/1/2.jpg",
+            "https://cdn.dummyjson.com/product-images/1/3.jpg"
+          ],
+          "delete": false,
+          "quantity": 1,
+          "user": "e5f6"
+        },
+        {
+          "id": "2679",
+          "title": "iPhone 9",
+          "description": "An apple mobile which is nothing like apple",
+          "price": 1000,
+          "discountPercentage": 12.96,
+          "rating": 4.69,
+          "stock": 94,
+          "brand": "Apple",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/1/1.jpg",
+            "https://cdn.dummyjson.com/product-images/1/2.jpg",
+            "https://cdn.dummyjson.com/product-images/1/3.jpg"
+          ],
+          "delete": false,
+          "quantity": 1,
+          "user": "e5f6"
+        }
+      ],
+      "totalAmount": 1740,
+      "totalItems": 2,
+      "user": {
+        "id": "e5f6",
+        "email": "test@gmail.com",
+        "password": "Dog@2002",
+        "addresses": [
+          {
+            "name": "harsha Boyapati",
+            "phone": "7032399999",
+            "street": "33-main ",
+            "city": "Eluru",
+            "state": "Ap",
+            "pinCode": "112233"
+          },
+          {
+            "name": "harsha",
+            "phone": "7032399999",
+            "street": "11-main ",
+            "city": "fbs",
+            "state": "Ap",
+            "pinCode": "112233"
+          }
+        ],
+        "uname": "Harsha",
+        "confirmPassword": "Dog@2002",
+        "role": "user"
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "harsha",
+        "phone": "7032399999",
+        "street": "11-main ",
+        "city": "fbs",
+        "state": "Ap",
+        "pinCode": "112233"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "67d1",
+      "items": [
+        {
+          "id": "f62d",
+          "title": "MacBook Pro",
+          "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+          "price": 1749,
+          "discountPercentage": 11.02,
+          "rating": 4.57,
+          "stock": 83,
+          "brand": "Apple",
+          "category": "laptops",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/6/thumbnail.png",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/6/1.png",
+            "https://cdn.dummyjson.com/product-images/6/2.jpg",
+            "https://cdn.dummyjson.com/product-images/6/3.png",
+            "https://cdn.dummyjson.com/product-images/6/4.jpg"
+          ],
+          "quantity": 1,
+          "user": "2ebb"
+        },
+        {
+          "id": "8d83",
+          "title": "Samsung Galaxy Book",
+          "description": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
+          "price": 1499,
+          "discountPercentage": 4.15,
+          "rating": 4.25,
+          "stock": 50,
+          "brand": "Samsung",
+          "category": "laptops",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/7/1.jpg",
+            "https://cdn.dummyjson.com/product-images/7/2.jpg",
+            "https://cdn.dummyjson.com/product-images/7/3.jpg",
+            "https://cdn.dummyjson.com/product-images/7/thumbnail.jpg"
+          ],
+          "quantity": 1,
+          "user": "2ebb"
+        }
+      ],
+      "totalAmount": 2993,
+      "totalItems": 2,
+      "user": {
+        "id": "2ebb",
+        "email": "test@gmail.com2",
+        "password": "Dog@2002",
+        "role": "user",
+        "addresses": [
+          {
+            "name": "Raj",
+            "phone": "1234567890",
+            "street": "123-Main",
+            "city": "Vijayawada",
+            "state": "AP",
+            "pinCode": "112233"
+          }
+        ]
+      },
+      "paymentMethod": "card",
+      "selectedAddress": {
+        "name": "Raj",
+        "phone": "1234567890",
+        "street": "123-Main",
+        "city": "Vijayawada",
+        "state": "AP",
+        "pinCode": "112233"
+      },
+      "status": "pending"
+    },
+    {
+      "id": "92d0",
+      "items": [
+        {
+          "id": "7af1",
+          "title": "Huawei P30",
+          "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+          "price": 499,
+          "discountPercentage": 10.58,
+          "rating": 4.09,
+          "stock": 32,
+          "brand": "Huawei",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/5/1.jpg",
+            "https://cdn.dummyjson.com/product-images/5/2.jpg",
+            "https://cdn.dummyjson.com/product-images/5/3.jpg"
+          ],
+          "quantity": 1,
+          "user": "2ebb"
+        },
+        {
+          "id": "f82b",
+          "title": "Huawei P30",
+          "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+          "price": 499,
+          "discountPercentage": 10.58,
+          "rating": 4.09,
+          "stock": 32,
+          "brand": "Huawei",
+          "category": "smartphones",
+          "thumbnail": "https://cdn.dummyjson.com/product-images/5/thumbnail.jpg",
+          "images": [
+            "https://cdn.dummyjson.com/product-images/5/1.jpg",
+            "https://cdn.dummyjson.com/product-images/5/2.jpg",
+            "https://cdn.dummyjson.com/product-images/5/3.jpg"
+          ],
+          "quantity": 1,
+          "user": "2ebb"
+        }
+      ],
+      "totalAmount": 892,
+      "totalItems": 2,
+      "user": {
+        "id": "2ebb",
+        "email": "test@gmail.com2",
+        "password": "Dog@2002",
+        "role": "user",
+        "addresses": [
+          {
+            "name": "Raj",
+            "phone": "1234567890",
+            "street": "123-Main",
+            "city": "Vijayawada",
+            "state": "AP",
+            "pinCode": "112233"
+          }
+        ]
+      },
+      "paymentMethod": "cash",
+      "selectedAddress": {
+        "name": "Raj",
+        "phone": "1234567890",
+        "street": "123-Main",
+        "city": "Vijayawada",
+        "state": "AP",
+        "pinCode": "112233"
+      },
+      "status": "pending"
+    }
+  ]
 }
