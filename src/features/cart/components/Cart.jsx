@@ -18,7 +18,6 @@ export default function Cart({ section, paymentType, address }) {
     const user = useSelector(selectCurrUser);
     const currentOrder = useSelector(CurrentOrder);
 
-    console.log(currentOrder, "------------------------>");
 
     const TotalSum = products.reduce(
         (total, item) => total + (Math.round((1 - (item.discountPercentage / 100)) * item.price) * item.quantity),
@@ -31,8 +30,13 @@ export default function Cart({ section, paymentType, address }) {
     );
 
     function handleOrder() {
-        const order = { items: products, totalAmount: TotalSum, totalItems: TotalItems, user, paymentMethod: paymentType, selectedAddress: address, status: "pending" };
-        dispatch(createOrderAsync(order));
+        if (address) {
+            const order = { items: products, totalAmount: TotalSum, totalItems: TotalItems, user, paymentMethod: paymentType, selectedAddress: address, status: "pending" };
+            dispatch(createOrderAsync(order));
+        }
+        else {
+            alert("select the address")
+        }
     }
 
 

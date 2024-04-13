@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { useTheme } from '@mui/material/styles';
 import { Link, Navigate } from 'react-router-dom'
 import { checkUserAsync, selectLogInError, selectLoggedInUserId } from '../authSlice';
+import { pageBackground } from '../../../utils/platfromThemes';
 
 export default function Login() {
     const {
@@ -27,7 +28,7 @@ export default function Login() {
     return (
         <ThemeProvider theme={theme}>
             {user && <Navigate to="/" replace={true}></Navigate>}
-            <Box sx={{ height: "100vh", bgcolor: "rgb(243 244 246)", width: "100%", padding: "30px 0px" }}>
+            <Box sx={{ height: "100vh", bgcolor: pageBackground, width: "100%", padding: "30px 0px" }}>
                 <Stack spacing={2} alignItems={'center'} >
                     <img src='./logo.svg' alt='logo' height="100px" />
                     <Typography variant='h5' gutterBottom >Log in to your account</Typography>
@@ -43,6 +44,7 @@ export default function Login() {
                         {errors?.email?.message && <p style={{ color: "red" }}>{errors?.email?.message}</p>}
                         <TextField label="Password" type='password' {...register("password", { required: "password is required", minLength: 8 })} />
                         {errors?.password?.message && <p style={{ color: "red" }}>{errors?.password?.message}</p>}
+                        <Link to={"/forgot-password"} style={{ textDecoration: "none", marginTop: "10px" }} ><Typography variant='div' color='primary.dark'>Forgot Password?</Typography></Link>
                         <Button type='submit' variant="contained">Log In</Button>
                         {Loginerror && <p style={{ color: "red", textAlign: "center" }}>{Loginerror.message}</p>}
                         <Typography variant='body' sx={{ textAlign: "center" }}>Not a Member?<Link to={"/signup"} style={{ textDecoration: "none" }} ><Typography variant='div' color='primary.dark'>Create a Account</Typography></Link></Typography>

@@ -26,7 +26,7 @@ const settings = [
     { name: "Your Profile", link: "/user-profile" },
     { name: "Your Orders", link: "/user-orders" },
     { name: "Settings", link: "/" },
-    { name: "Logout", link: "/login" }
+    { name: "Logout", link: "/logout" }
 ]
 
 function ResponsiveAppBar() {
@@ -127,7 +127,7 @@ function ResponsiveAppBar() {
                             </Link>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt={userInfo.uname} >{userInfo.uname ? userInfo.uname[0] : '?'}</Avatar>
+                                    <Avatar alt={userInfo?.uname} >{userInfo?.uname ? userInfo.uname[0] : '?'}</Avatar>
                                 </IconButton>
                             </Tooltip>
                             <Menu
@@ -198,7 +198,7 @@ function ResponsiveAppBar() {
                             <Avatar alt={userInfo.uname}>{userInfo.uname ? userInfo.uname[0] : '?'}</Avatar>
                         </IconButton>
                         <Box>
-                            <p>{userInfo.uname}</p>
+                            <p>{userInfo?.uname}</p>
                             <p>{userInfo.email}</p>
                         </Box>
                     </Box>

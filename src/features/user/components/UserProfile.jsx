@@ -94,11 +94,11 @@ export default function UserProfile() {
                                     <Box sx={{ display: "flex", justifyContent: "space-between", alignContent: "center", width: "100%" }}>
                                         <Typography variant='h6' gutterBottom>{add.name}</Typography>
                                         <Box>
-                                            <IconButton>
-                                                <EditIcon onClick={() => handleFormOpen(index)} />
+                                            <IconButton onClick={() => handleFormOpen(index)}>
+                                                <EditIcon />
                                             </IconButton>
-                                            <IconButton>
-                                                <DeleteIcon onClick={() => handleDeleteAddress(index)} />
+                                            <IconButton onClick={() => handleDeleteAddress(index)}>
+                                                <DeleteIcon />
                                             </IconButton>
                                         </Box>
                                     </Box>

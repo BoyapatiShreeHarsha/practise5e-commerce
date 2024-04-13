@@ -66,8 +66,8 @@ export default function UserFrom() {
                 </Box>
 
             </Box>
-            <IconButton>
-                <EditIcon onClick={handleUserFormOpen} />
+            <IconButton onClick={handleUserFormOpen}>
+                <EditIcon />
             </IconButton>
 
             {/* user form */}

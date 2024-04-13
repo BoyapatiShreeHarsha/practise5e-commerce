@@ -16,7 +16,7 @@ const paymentMode = [
 ]
 
 export default function Checkout() {
-    const [selectedAdd, setSelectedAdd] = useState(0);
+    const [selectedAdd, setSelectedAdd] = useState(-1);
     const [paymentType, setPaymentType] = useState(0);
 
 
@@ -175,7 +175,7 @@ export default function Checkout() {
                 </Paper>
             </Box>
             <Box sx={{ flexGrow: 1 }}>
-                <Cart section={"checkout"} paymentType={paymentMode[paymentType].value} address={user?.addresses[selectedAdd]} />
+                <Cart section={"checkout"} paymentType={paymentMode[paymentType].value} address={selectedAdd > -1 ? user?.addresses[selectedAdd] : null} />
             </Box>
         </Stack>
     )

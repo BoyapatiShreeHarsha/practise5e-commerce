@@ -21,6 +21,8 @@ import OrderSuccess from './pages/OrderSuccess';
 import UserOrdersPage from './pages/UserOrdersPage';
 import UserProfilePage from './pages/UserProfilePage';
 import { fetchUserDataAsync } from './features/user/userSlice';
+import LogOutPage from './pages/LogOutPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 
 function App() {
 
@@ -46,6 +48,8 @@ function App() {
         <Route path='/order-succes/:id' element={<Protected><OrderSuccess /></Protected>} />
         <Route path='/user-orders' element={<Protected><UserOrdersPage /></Protected>} />
         <Route path='/user-profile' element={<Protected><UserProfilePage /></Protected>} />
+        <Route path='/logout' element={<LogOutPage />} />
+        <Route path='/forgot-password' element={<ForgotPasswordPage />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>

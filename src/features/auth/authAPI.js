@@ -31,3 +31,11 @@ export function checkUser(loginData) {
 
     });
 }
+
+
+export function signOut(userId) {
+    return new Promise(async (resolve, reject) => {
+        // call to backend to end any session
+        resolve({ data: "success" });
+    });
+}
