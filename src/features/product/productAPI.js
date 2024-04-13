@@ -9,6 +9,34 @@ export function fetchAllProducts() {
     );
 }
 
+export function createProduct(productData) {
+    let data = JSON.stringify(productData);
+    return new Promise(async (resolve) => {
+        const response = await axios.post('/products', data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        // console.log(response);
+        resolve(response);
+    }
+    );
+}
+
+export function updateProduct(productData) {
+    let data = JSON.stringify(productData);
+    return new Promise(async (resolve) => {
+        const response = await axios.patch(`/products/${productData.id}`, data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        // console.log(response);
+        resolve(response)
+    }
+    );
+}
+
 export function fetchProduct(id) {
     return new Promise(async (resolve) => {
         const response = await axios.get(`/products/${id}`);

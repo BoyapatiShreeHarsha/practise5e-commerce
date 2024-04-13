@@ -13,6 +13,7 @@ import {
   Route
 } from "react-router-dom";
 import Protected from './features/auth/components/Protected';
+import AdminProtected from './features/auth/components/AdminProtected';
 import { selectLoggedInUserId } from './features/auth/authSlice';
 import { useEffect } from 'react';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
@@ -23,6 +24,7 @@ import UserProfilePage from './pages/UserProfilePage';
 import { fetchUserDataAsync } from './features/user/userSlice';
 import LogOutPage from './pages/LogOutPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
+import ProductFormPage from './pages/ProductFormPage';
 
 function App() {
 
@@ -40,11 +42,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Protected><Home /></Protected>} />
+        <Route path='/admin' element={<AdminProtected><Home /></AdminProtected>} />
+        <Route path='/admin/product-form' element={<AdminProtected><ProductFormPage /></AdminProtected>} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/cart' element={<Protected><CartPage /></Protected>} />
         <Route path='/checkout' element={<Protected><Checkout /></Protected>} />
         <Route path='/product-details/:id' element={<Protected><ProductDetailsPage /></Protected>} />
+        <Route path='/admin/edit-product-from/:id' element={<AdminProtected><ProductFormPage /></AdminProtected>} />
         <Route path='/order-succes/:id' element={<Protected><OrderSuccess /></Protected>} />
         <Route path='/user-orders' element={<Protected><UserOrdersPage /></Protected>} />
         <Route path='/user-profile' element={<Protected><UserProfilePage /></Protected>} />

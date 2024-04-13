@@ -8,7 +8,6 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
@@ -17,11 +16,16 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CloseIcon from '@mui/icons-material/Close';
 import { customButton } from "../../../utils/muiCustomComponents";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectTotalCartItems } from "../../cart/cartSlice";
 import { selectCurrUser } from "../../user/userSlice";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = [
+    { name: "Products", link: "#", role: "user" },
+    { name: "Pricing", link: "#", role: "user" },
+    { name: "Blog", link: "#", role: "user" },
+    { name: "Admin", link: "/admin", role: "admin" }
+];
 const settings = [
     { name: "Your Profile", link: "/user-profile" },
     { name: "Your Orders", link: "/user-orders" },
@@ -102,21 +106,30 @@ function ResponsiveAppBar() {
                             </Typography>
                         </Box>
                         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                            {pages.map((page, index) => (
-                                <p key={index}>{customButton({
-                                    label: page,
+                            {pages.map((pageObj, index) => {
+                                if (userInfo?.role === pageObj.role) {
+                                    return <p key={`page-${index}`}>
+                                        <Link to={pageObj.link} style={{ textDecoration: "none" }}>{
+                                            customButton({
+                                                label: pageObj.name,
 
-                                    propsToBePassed: {
-                                        variant: "contained",
-                                        onClick: () => {
-                                            handleActive(page);
-                                        },
-                                        key: index,
-                                        sx: { margin: "0 3px", color: "white", display: "block", justifyContent: "flex-start", bgcolor: active === page ? "rgb(17, 24, 39)" : "rgb(31, 41, 55)" }
-                                    },
-                                    classprops: { hover_background_color: active === page ? "rgb(17, 24, 39)" : "rgb(55, 65, 81)" }
-                                })}</p>
-                            ))}
+                                                propsToBePassed: {
+                                                    variant: "contained",
+                                                    onClick: () => {
+                                                        handleActive(pageObj.name);
+                                                    },
+                                                    key: index,
+                                                    sx: { margin: "0 3px", color: "white", display: "block", justifyContent: "flex-start", bgcolor: active === pageObj.name ? "rgb(17, 24, 39)" : "rgb(31, 41, 55)" }
+                                                },
+                                                classprops: { hover_background_color: active === pageObj.name ? "rgb(17, 24, 39)" : "rgb(55, 65, 81)" }
+                                            })
+                                        }</Link>
+                                    </p>
+                                }
+                                else {
+                                    return <React.Fragment key={`page-${index}`}></React.Fragment>
+                                }
+                            })}
                         </Box>
 
                         <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" }, justifyContent: "flex-end", alignItems: "center" }}>
@@ -172,21 +185,26 @@ function ResponsiveAppBar() {
             {anchorElNav ? <Box sx={{ bgcolor: "rgb(31, 41, 55)", padding: "10px 0px", display: { xs: "block", md: "none" } }}>
                 <Stack spacing={1}>
                     {
-                        pages.map((page, index) => {
+                        pages.map((pageObj, index) => {
+                            if (userInfo?.role === pageObj.role) {
+                                return <div style={{ width: "100%" }} key={`page-${index}`}><Link to={pageObj.link} style={{ textDecoration: "none" }}>{customButton({
+                                    label: pageObj.name,
 
-                            return <div style={{ width: "100%" }} key={index}>{customButton({
-                                label: page,
-
-                                propsToBePassed: {
-                                    variant: "contained",
-                                    onClick: () => {
-                                        handleActive(page);
+                                    propsToBePassed: {
+                                        variant: "contained",
+                                        onClick: () => {
+                                            handleActive(pageObj.name);
+                                        },
+                                        key: index,
+                                        sx: { justifyContent: "flex-start", bgcolor: active === pageObj.name ? "rgb(17, 24, 39)" : "rgb(31, 41, 55)", width: "100%" }
                                     },
-                                    key: index,
-                                    sx: { justifyContent: "flex-start", bgcolor: active === page ? "rgb(17, 24, 39)" : "rgb(31, 41, 55)", width: "100%" }
-                                },
-                                classprops: { hover_background_color: active === page ? "rgb(17, 24, 39)" : "rgb(55, 65, 81)" }
-                            })}</div>
+                                    classprops: { hover_background_color: active === pageObj.name ? "rgb(17, 24, 39)" : "rgb(55, 65, 81)" }
+                                })}
+                                </Link></div>
+                            }
+                            else {
+                                return <React.Fragment key={`page-${index}`}></React.Fragment>
+                            }
                         })
                     }
                 </Stack>

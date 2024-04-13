@@ -35,8 +35,8 @@ export default function UserFrom() {
 
     const funcSubmit2 = (data) => {
         handleFormClose2();
-        console.log(data);
         let newUser = { ...userInfo };
+        delete newUser.confirmPassword;
 
         dispatch(updateUserAsync({ ...newUser, ...data }))
 

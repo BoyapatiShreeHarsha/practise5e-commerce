@@ -8,9 +8,11 @@ import { rowDivider } from '../utils/muiCustomComponents';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ProductList from '../features/product/components/ProductList';
 import CloseIcon from '@mui/icons-material/Close';
-import { ITEMS_PER_PAGE } from '../app/contants';
-import { fetchAllBrandsAsync, fetchAllCategoriesAsync, selectBrands, selectCategories, selectPages, selectTotalItems } from '../features/product/productSlice';
+import { fetchAllBrandsAsync, fetchAllCategoriesAsync, selectBrands, selectCategories, selectPages } from '../features/product/productSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrUser } from '../features/user/userSlice';
+import AdminProductList from '../features/admin/components/AdminProductList';
+import { pageBackground } from '../utils/platfromThemes';
 
 
 const sortingList = [
@@ -23,7 +25,7 @@ const sortingList = [
 export default function Home() {
     const [page, setPage] = useState(1);
     const [openFilter, setOpenFilter] = useState(false);
-    const TOTAL_ITEMS = useSelector(selectTotalItems);
+    const userData = useSelector(selectCurrUser);
     const dispatch = useDispatch();
     const [filters, setFilters] = useState([]);
     const categories = useSelector(selectCategories);
@@ -136,7 +138,7 @@ export default function Home() {
 
     return (
         <div>
-            <Box sx={{ bgcolor: "rgb(243 244 246)", height: "100vh", position: openFilter ? "fixed" : "relative" }}>
+            <Box sx={{ bgcolor: pageBackground, height: "100vh", position: openFilter ? "fixed" : "relative" }}>
                 <MobileFilter openFilter={openFilter} setOpenFilter={setOpenFilter} handleFilter={handleFilter} filters={filters} />
                 <Navbar />
                 <Paper elevation={3} sx={{ padding: "24px", width: "100%" }}>
@@ -150,7 +152,8 @@ export default function Home() {
                     <Box className={styles.middleBox}>
                         <DesktopFilter handleFilter={handleFilter} filterState={filterState} filters={filters} />
                         {/* main products display */}
-                        <Box sx={{ flexGrow: 7 }}><ProductList filterState={filterState} sortState={sortState} page={page} /></Box>
+                        {userData?.role === 'user' && <Box sx={{ flexGrow: 7 }}><ProductList filterState={filterState} sortState={sortState} page={page} /></Box>}
+                        {userData?.role === 'admin' && <Box sx={{ flexGrow: 7 }}><AdminProductList filterState={filterState} sortState={sortState} page={page} /></Box>}
                     </Box>
                     {/* bottom section */}
                     {rowDivider({ node: { margin: "20px 0px" } })}
