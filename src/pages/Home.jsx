@@ -137,13 +137,13 @@ export default function Home() {
 
 
     return (
-        <div>
-            <Box sx={{ bgcolor: pageBackground, height: "100vh", position: openFilter ? "fixed" : "relative" }}>
-                <MobileFilter openFilter={openFilter} setOpenFilter={setOpenFilter} handleFilter={handleFilter} filters={filters} />
-                <Navbar />
-                <Paper elevation={3} sx={{ padding: "24px", width: "100%" }}>
-                    <Typography variant="h5" sx={{ fontWeight: "700" }}>E-Commerce</Typography>
-                </Paper>
+        <Box sx={{ bgcolor: pageBackground, position: openFilter ? "fixed" : "relative" }}>
+            <MobileFilter openFilter={openFilter} setOpenFilter={setOpenFilter} handleFilter={handleFilter} filters={filters} />
+            <Navbar />
+            <Paper elevation={3} sx={{ padding: "24px", width: "100%" }}>
+                <Typography variant="h5" sx={{ fontWeight: "700" }}>E-Commerce</Typography>
+            </Paper>
+            <Box sx={{ paddingBottom: "10px" }}>
                 <Paper elevation={3} className={styles.paperComponent}>
                     {/* Top section */}
                     <TopBar handleSortOpen={handleSortOpen} anchorEl={anchorEl} handleSortClose={handleSortClose} selectedIndex={selectedIndex} handleSortingOptions={handleSortingOptions} setOpenFilter={setOpenFilter} />
@@ -162,8 +162,8 @@ export default function Home() {
                         <Pagination count={totalPages} page={page} onChange={handlePageChange} />
                     </Stack>
                 </Paper>
-            </Box >
-        </div >
+            </Box>
+        </Box >
     )
 }
 

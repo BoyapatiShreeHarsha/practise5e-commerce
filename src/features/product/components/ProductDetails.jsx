@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom'
 import { fetchProductAsync, selectProduct } from '../productSlice';
 import { addToCartAsync, selectCartItems } from '../../cart/cartSlice';
 import { selectLoggedInUserId } from '../../auth/authSlice';
+import { useAlert } from 'react-alert'
 
 
 let highlights = [
@@ -40,6 +41,7 @@ export default function ProductDetails() {
     const params = useParams();
     const product = useSelector(selectProduct);
     const cartItems = useSelector(selectCartItems);
+    const alert = useAlert()
 
     const dispatch = useDispatch();
     const user = useSelector(selectLoggedInUserId);
@@ -67,13 +69,14 @@ export default function ProductDetails() {
         if (product.id && user) {
             for (let i = 0; i < cartItems.length; i++) {
                 if (+cartItems[i].productId == product.id) {
-                    alert("This Product is already present")
+                    alert.error("This Product is already present")
                     return;
                 }
             }
             let newProduct = { ...product };
             delete newProduct.id;
-            dispatch(addToCartAsync({ ...newProduct, productId: product.id, quantity: 1, user }))
+            dispatch(addToCartAsync({ ...newProduct, productId: product.id, quantity: 1, user }));
+            alert.show("Added to the Cart")
         }
     }
 

@@ -21,9 +21,7 @@ import { selectTotalCartItems } from "../../cart/cartSlice";
 import { selectCurrUser } from "../../user/userSlice";
 
 const pages = [
-    { name: "Products", link: "#", role: "user" },
-    { name: "Pricing", link: "#", role: "user" },
-    { name: "Blog", link: "#", role: "user" },
+    { name: "Products", link: "/", role: "user" },
     { name: "Admin", link: "/admin", role: "admin" },
     { name: "Orders", link: "/admin-orders", role: "admin" }
 ];
@@ -67,7 +65,8 @@ function ResponsiveAppBar() {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Box onClick={() => navigate("/")} sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
-                            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+                            <img src="/logo.svg" alt="logo" style={{ display: "flex", marginRight: "1px", height: "64px", width: "64px" }} />
+
                             <Typography
                                 variant="h6"
                                 noWrap
@@ -75,7 +74,7 @@ function ResponsiveAppBar() {
                                 href="/"
                                 sx={{
                                     mr: 2,
-                                    display: { xs: "none", md: "flex" },
+                                    display: "flex",
                                     fontFamily: "monospace",
                                     fontWeight: 700,
                                     letterSpacing: ".3rem",
@@ -83,28 +82,9 @@ function ResponsiveAppBar() {
                                     textDecoration: "none",
                                 }}
                             >
-                                LOGO
+                                E-COMMERCE
                             </Typography>
 
-                            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-                            <Typography
-                                variant="h5"
-                                noWrap
-                                component="a"
-                                href="/"
-                                sx={{
-                                    mr: 2,
-                                    display: { xs: "flex", md: "none" },
-                                    flexGrow: 1,
-                                    fontFamily: "monospace",
-                                    fontWeight: 700,
-                                    letterSpacing: ".3rem",
-                                    color: "inherit",
-                                    textDecoration: "none",
-                                }}
-                            >
-                                LOGO
-                            </Typography>
                         </Box>
                         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                             {pages.map((pageObj, index) => {

@@ -26,6 +26,15 @@ import LogOutPage from './pages/LogOutPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ProductFormPage from './pages/ProductFormPage';
 import AdminOrderPage from './pages/AdminOrderPage';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+
+const options = {
+  position: positions.BOTTOM_LEFT,
+  timeout: 5000,
+  offset: '30px',
+  transition: transitions.SCALE
+}
 
 function App() {
 
@@ -40,26 +49,28 @@ function App() {
   }, [dispatch, user])
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Protected><Home /></Protected>} />
-        <Route path='/admin' element={<AdminProtected><Home /></AdminProtected>} />
-        <Route path='/admin/product-form' element={<AdminProtected><ProductFormPage /></AdminProtected>} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/signup' element={<SignUpPage />} />
-        <Route path='/cart' element={<Protected><CartPage /></Protected>} />
-        <Route path='/checkout' element={<Protected><Checkout /></Protected>} />
-        <Route path='/product-details/:id' element={<Protected><ProductDetailsPage /></Protected>} />
-        <Route path='/admin/edit-product-from/:id' element={<AdminProtected><ProductFormPage /></AdminProtected>} />
-        <Route path='/admin-orders' element={<AdminProtected><AdminOrderPage /></AdminProtected>} />
-        <Route path='/order-succes/:id' element={<Protected><OrderSuccess /></Protected>} />
-        <Route path='/user-orders' element={<Protected><UserOrdersPage /></Protected>} />
-        <Route path='/user-profile' element={<Protected><UserProfilePage /></Protected>} />
-        <Route path='/logout' element={<LogOutPage />} />
-        <Route path='/forgot-password' element={<ForgotPasswordPage />} />
-        <Route path='*' element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Protected><Home /></Protected>} />
+          <Route path='/admin' element={<AdminProtected><Home /></AdminProtected>} />
+          <Route path='/admin/product-form' element={<AdminProtected><ProductFormPage /></AdminProtected>} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signup' element={<SignUpPage />} />
+          <Route path='/cart' element={<Protected><CartPage /></Protected>} />
+          <Route path='/checkout' element={<Protected><Checkout /></Protected>} />
+          <Route path='/product-details/:id' element={<Protected><ProductDetailsPage /></Protected>} />
+          <Route path='/admin/edit-product-from/:id' element={<AdminProtected><ProductFormPage /></AdminProtected>} />
+          <Route path='/admin-orders' element={<AdminProtected><AdminOrderPage /></AdminProtected>} />
+          <Route path='/order-succes/:id' element={<Protected><OrderSuccess /></Protected>} />
+          <Route path='/user-orders' element={<Protected><UserOrdersPage /></Protected>} />
+          <Route path='/user-profile' element={<Protected><UserProfilePage /></Protected>} />
+          <Route path='/logout' element={<LogOutPage />} />
+          <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </AlertProvider>
   )
 }
 

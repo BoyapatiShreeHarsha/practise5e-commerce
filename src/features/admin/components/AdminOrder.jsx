@@ -10,6 +10,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { useAlert } from 'react-alert'
 
 const columns = [
     { id: 'orderId', value: "id", label: 'Order#', },
@@ -37,6 +38,7 @@ export default function AdminOrder() {
     const [changeStatus, setChangeStatus] = useState(null);
     const [asc, setAsc] = useState(true);
     const [attribute, setAttribute] = useState("id");
+    const alert = useAlert()
 
 
     const handlePageChange = (event, value) => {
@@ -155,7 +157,7 @@ export default function AdminOrder() {
                                         <TableCell align='center' sx={{ minWidth: "160px" }}>
                                             {editStatus !== order.id && <IconButton onClick={() => {
                                                 if (editStatus) {
-                                                    alert("close other drop down");
+                                                    alert.show("close other drop down");
                                                 }
                                                 else {
                                                     setEditStatus(order.id);

@@ -1,8 +1,8 @@
-import { Box, Card, CardContent, CardMedia, Grid, Rating, Stack, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Grid, Rating, Skeleton, Stack, Typography } from '@mui/material';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchProductsByFiltersAsync, selectAllProducts } from '../productSlice';
+import { fetchProductsByFiltersAsync, selectAllProducts, selectLoading } from '../productSlice';
 import { ITEMS_PER_PAGE, discountedPrice } from '../../../app/contants';
 
 
@@ -11,6 +11,7 @@ import { ITEMS_PER_PAGE, discountedPrice } from '../../../app/contants';
 export default function ProductList({ filterState, sortState, page }) {
     const dispatch = useDispatch();
     const products = useSelector(selectAllProducts);
+    const loading = useSelector(selectLoading);
 
     useEffect(() => {
         let pageState = {
@@ -24,6 +25,26 @@ export default function ProductList({ filterState, sortState, page }) {
     const navigate = useNavigate();
     return (
         <Grid container spacing={2} sx={{ paddingLeft: "10px" }}>
+            {loading === 'loading' && new Array(ITEMS_PER_PAGE).fill(null).map((_, index) => {
+                return (<Grid key={index} item xs={12} sm={6} md={4}>
+                    <Card >
+                        <Box sx={{ height: "300px", padding: "10px", boxSizing: "border-box" }}>
+                            <Skeleton variant="rounded" sx={{ height: "100%", width: "100%", }} />
+                        </Box>
+                        <CardContent>
+                            <Stack justifyContent={'space-between'} alignContent={'center'} direction={'row'}>
+                                <Skeleton variant="rounded" sx={{ width: "57%" }} />
+                                <Skeleton variant="rounded" sx={{ width: "23%" }} />
+
+                            </Stack>
+                            <Stack justifyContent={'space-between'} direction={'row'} sx={{ marginTop: "10px" }}>
+                                <Skeleton variant="rounded" sx={{ width: "50%" }} />
+                                <Skeleton variant="rounded" sx={{ width: "30%" }} />
+                            </Stack>
+                        </CardContent>
+                    </Card>
+                </Grid>)
+            })}
             {products.length > 0 && products.map((product, index) => {
                 return (<Grid key={product.id} item xs={12} sm={6} md={4}>
                     <Card onClick={() => {

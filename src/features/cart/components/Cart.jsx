@@ -1,5 +1,5 @@
 import { Box, Button, Paper, Stack, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Cart.module.css'
 import { rowDivider } from '../../../utils/muiCustomComponents';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,7 +9,8 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { deleteItemFromCartAsync, selectCartItems } from '../cartSlice';
 import { selectCurrUser } from '../../user/userSlice'
 import { CurrentOrder, createOrderAsync } from '../../order/orderSlice';
-
+import { useAlert } from 'react-alert'
+import CustomModal from '../../../utils/CustomModal';
 
 
 export default function Cart({ section, paymentType, address }) {
@@ -17,6 +18,8 @@ export default function Cart({ section, paymentType, address }) {
     const dispatch = useDispatch();
     const user = useSelector(selectCurrUser);
     const currentOrder = useSelector(CurrentOrder);
+    const alert = useAlert()
+    const [openModal, setOpenModal] = useState(null);
 
 
     const TotalSum = products.reduce(
@@ -35,7 +38,7 @@ export default function Cart({ section, paymentType, address }) {
             dispatch(createOrderAsync(order));
         }
         else {
-            alert("select the address")
+            alert.error("select the address")
         }
     }
 
@@ -73,8 +76,17 @@ export default function Cart({ section, paymentType, address }) {
                                         <Box className={styles.rightSide}>
                                             <Typography variant='h6'>$ {Math.round((1 - ((ele?.discountPercentage) / 100)) * ele?.price)}</Typography>
                                             <Button variant="text" onClick={() => {
-                                                dispatch(deleteItemFromCartAsync(ele.id))
+                                                setOpenModal(ele.id);
+
                                             }}>Remove</Button>
+                                            {
+                                                openModal === ele.id && <CustomModal title={"Delete Item"} message={`Do you want to delete ${ele.title}?`} cancelName={"Cancel"} cancelFunction={() => {
+                                                    setOpenModal(null);
+                                                }} saveName={"Delete"} saveFunction={() => {
+                                                    setOpenModal(null);
+                                                    dispatch(deleteItemFromCartAsync(ele.id))
+                                                }} color="error" />
+                                            }
                                         </Box>
                                     </Box>
                                     {rowDivider({ node: { color: "rgb(229 231 235)" } })}

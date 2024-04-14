@@ -7,6 +7,7 @@ import { Button, MenuItem, Stack, TextField, Typography } from '@mui/material'
 import { customTextFeild, rowDivider } from '../../../utils/muiCustomComponents'
 import { clearSelectedProduct, createProductAsync, fetchProductAsync, selectBrands, selectCategories, selectProduct, updateProductAsync } from '../../product/productSlice';
 import { useParams, useNavigate } from 'react-router-dom'
+import CustomModal from '../../../utils/CustomModal';
 
 
 function ProductForm() {
@@ -20,6 +21,7 @@ function ProductForm() {
 
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
+    const [openModal, setOpenModal] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -62,6 +64,7 @@ function ProductForm() {
         let product = { ...oldProduct };
         product.delete = true;
         dispatch(updateProductAsync(product));
+        navigate("/");
     }
 
     useEffect(() => {
@@ -314,7 +317,15 @@ function ProductForm() {
                 <Stack spacing={2} justifyContent={'flex-end'} direction={'row'} alignItems={'center'}>
                     <Button type="reset" variant="text">Reset</Button>
                     <Button type="submit" variant="contained">{params.id ? "Edit" : "Add"} Product</Button>
-                    {params.id && <Button variant='contained' color='error' onClick={handleProductDelete}>Delete</Button>}
+                    {params.id && !oldProduct?.delete && <Button variant='contained' color='error' onClick={() => setOpenModal(true)}>Delete</Button>}
+                    {
+                        openModal && <CustomModal title={"Delete Product"} message={"Do you want to delete this product?"} cancelName="Cancel" cancelFunction={() => {
+                            setOpenModal(false);
+                        }} saveName="Delete" saveFunction={() => {
+                            setOpenModal(false);
+                            handleProductDelete();
+                        }} color="error" />
+                    }
                 </Stack>
 
             </form>
