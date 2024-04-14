@@ -24,6 +24,7 @@ export function createProduct(productData) {
 }
 
 export function updateProduct(productData) {
+    // hope removed the id
     let data = JSON.stringify(productData);
     return new Promise(async (resolve) => {
         const response = await axios.patch(`/products/${productData.id}`, data, {
@@ -64,6 +65,8 @@ export function fetchProductsByFilters(filter, sort, page) {
     for (let key in page) {
         queryString += `${key}=${page[key]}&`
     }
+
+    console.log(queryString);
 
     return new Promise(async (resolve) => {
         const response = await axios.get('/products?' + queryString);
