@@ -46,8 +46,6 @@ export function fetchAllOrders({ sort, page }) {
         queryString += "&";
     }
 
-    console.log(queryString);
-
     return new Promise(async (resolve) => {
         const response = await axios.get('/orders?' + queryString);
         // console.log(response);

@@ -81,7 +81,7 @@ export default function Home() {
         setSelectedIndex(index);
         let obj = {
             _sort: sortingList[index].sort,
-            // _order: sortingList[index].order
+            _order: sortingList[index].order
         }
         setSortState(obj);
         setAnchorEl(null);

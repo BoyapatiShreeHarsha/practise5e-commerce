@@ -8,6 +8,7 @@ import { customTextFeild, rowDivider } from '../../../utils/muiCustomComponents'
 import { clearSelectedProduct, createProductAsync, fetchProductAsync, selectBrands, selectCategories, selectProduct, updateProductAsync } from '../../product/productSlice';
 import { useParams, useNavigate } from 'react-router-dom'
 import CustomModal from '../../../utils/CustomModal';
+import { useAlert } from 'react-alert'
 
 
 function ProductForm() {
@@ -16,6 +17,7 @@ function ProductForm() {
     const brands = useSelector(selectBrands);
     const params = useParams();
     const navigate = useNavigate();
+    const alert = useAlert()
 
     const oldProduct = useSelector(selectProduct);
 
@@ -34,7 +36,14 @@ function ProductForm() {
     } = useForm();
 
     const funcSubmit = (data) => {
-
+        if (!brand) {
+            alert.error("Brand should be selected");
+            return;
+        }
+        if (!category) {
+            alert.error("Category should be selected");
+            return;
+        }
         data.images = [data.image1, data.image2, data.image3];
         delete data.image1;
         delete data.image2;
@@ -47,16 +56,22 @@ function ProductForm() {
         data.category = category;
         let product = { ...data };
         product.delete = false;
-        if (!params.id)
+        if (!params.id) {
             dispatch(createProductAsync(product));
+            reset();
+            setCategory("");
+            setBrand("");
+            navigate("/");
+        }
         else {
             product.id = params.id;
             dispatch(updateProductAsync(product));
+            reset();
+            setCategory("");
+            setBrand("");
+            navigate("/");
         }
-        reset();
-        setCategory("");
-        setBrand("");
-        navigate("/");
+
 
     }
 

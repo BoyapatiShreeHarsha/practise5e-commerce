@@ -1,4 +1,4 @@
-const { Category } = require("../models/Brand");
+const { Category } = require("../models/Category");
 
 async function createCategory(req, res, next) {
     try {
@@ -14,7 +14,7 @@ async function createCategory(req, res, next) {
 async function getAllCategory(req, res, next) {
     try {
         const categories = await Category.find();
-        return res.status(200).json({ data: categories });
+        return res.status(200).json(categories);
     } catch (error) {
         next(error);
     }

@@ -1,7 +1,7 @@
 const { z } = require("zod");
 
 
-const productShema = z.object({
+const CartShcema = z.object({
     title: z.string(),
     description: z.string(),
     price: z.number().refine((num) => num > 0, {
@@ -16,19 +16,22 @@ const productShema = z.object({
     category: z.string(),
     thumbnail: z.string().url(),
     images: z.array(z.string().url()),
-    delete: z.optional(z.boolean())
+    productId: z.string(),
+    quantity: z.number().refine((num) => num > 0, {
+        message: 'Quantity must be positive'
+    }),
+    user: z.string()
 })
-// anything else properties are not allowed by this.
 
-async function validProduct(req, res, next) {
+async function validCart(req, res, next) {
     try {
-        const result = productShema.parse(req.body);
+        const result = CartShcema.parse(req.body);
         next();
     } catch (error) {
-        res.status(403).json({ data: "Invalid data of Product" });
+        res.status(403).json({ data: "Invalid data of Cart", message: error });
     }
 }
 
 module.exports = {
-    validProduct
+    validCart
 }

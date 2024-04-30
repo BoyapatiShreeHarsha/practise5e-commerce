@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const ProductSchema = new mongoose.Schema({
+const CartSchema = new mongoose.Schema({
     title: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     price: {
@@ -9,28 +9,30 @@ const ProductSchema = new mongoose.Schema({
         required: true
     },
     discountPercentage: { type: Number, required: true },
-    rating: { type: Number, required: true, default: 0 },
+    rating: { type: Number, required: true },
     stock: { type: Number, required: true },
     brand: { type: String, required: true },
     category: { type: String, required: true },
     thumbnail: { type: String, required: true },
     images: { type: [String], required: true },
-    delete: { type: Boolean }
+    productId: { type: mongoose.Schema.Types.ObjectId, ref: "Products" },
+    quantity: { type: Number, require: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "Users" }
 });
 
-const virtual = ProductSchema.virtual('id');
+const virtual = CartSchema.virtual('id');
 virtual.get(function () {
     return this._id;
 })
-ProductSchema.set('toJSON', {
+CartSchema.set('toJSON', {
     virtuals: true,
     versionKey: false,
     transform: function (doc, ret) { delete ret._id }
 })
 
 
-const Product = mongoose.model('Products', ProductSchema);
+const Cart = mongoose.model('Carts', CartSchema);
 
 module.exports = {
-    Product
+    Cart
 }

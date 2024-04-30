@@ -46,7 +46,7 @@ export function fetchProduct(id) {
     );
 }
 
-export function fetchProductsByFilters(filter, sort, page) {
+export function fetchProductsByFilters(filter, sort, page, admin) {
     // filter = {"category":["smartphone","laptops"]}
     // sort = {_sort:"price",_order="desc"}
     // pagination = {_page:1,_per_page=12}.
@@ -65,8 +65,9 @@ export function fetchProductsByFilters(filter, sort, page) {
     for (let key in page) {
         queryString += `${key}=${page[key]}&`
     }
-
-    console.log(queryString);
+    for (let key in admin) {
+        queryString += `${key}=${admin[key]}&`
+    }
 
     return new Promise(async (resolve) => {
         const response = await axios.get('/products?' + queryString);

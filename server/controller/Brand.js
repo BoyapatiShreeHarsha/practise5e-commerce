@@ -14,7 +14,7 @@ async function createBrand(req, res, next) {
 async function getAllBrand(req, res, next) {
     try {
         const Brands = await Brand.find();
-        return res.status(200).json({ data: Brands });
+        return res.status(200).json(Brands);
     } catch (error) {
         next(error);
     }

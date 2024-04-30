@@ -10,7 +10,7 @@ async function validateCategory(req, res, next) {
         const result = categorySchema.parse(req.body);
         next();
     } catch (error) {
-        res.status(403).json({ data: "Invalid data of Category" });
+        res.status(403).json({ data: "Invalid data of Category", message: error });
     }
 }
 

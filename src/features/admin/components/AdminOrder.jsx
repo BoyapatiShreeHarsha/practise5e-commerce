@@ -52,7 +52,7 @@ export default function AdminOrder() {
         }
         let sortState = {
             _sort: attribute,
-            // _order: (asc ? "asc" : "desc")
+            _order: (asc ? "asc" : "desc")
         }
 
         dispatch(fetchAllOrdersAsync({ sort: sortState, page: pageState }))

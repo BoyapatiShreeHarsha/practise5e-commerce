@@ -3,7 +3,7 @@ import axios from "../../utils/axios"
 
 export function fetchUserOrdersById(userId) {
     return new Promise(async (resolve, reject) => {
-        const response = await axios.get(`/orders?user.id=${userId}`);
+        const response = await axios.get(`/orders/user?user=${userId}`);
         resolve(response);
 
     });
@@ -17,7 +17,6 @@ export function fetchUserData(userId) {
         if (response.data.length > 0) {
             resolve({ data: response.data[0] });
         }
-
         reject({ message: 'user not found' });
 
     });

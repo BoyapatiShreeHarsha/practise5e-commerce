@@ -18,7 +18,8 @@ export default function ProductList({ filterState, sortState, page }) {
             _page: page,
             _per_page: ITEMS_PER_PAGE
         }
-        dispatch(fetchProductsByFiltersAsync({ filterState, sortState, pageState }));
+        let adminState = { admin: false };
+        dispatch(fetchProductsByFiltersAsync({ filterState, sortState, pageState, adminState }));
     }, [filterState, sortState, page])
 
 

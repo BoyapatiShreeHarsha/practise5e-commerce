@@ -91,14 +91,14 @@ export default function ProductDetails() {
             <Paper elevation={3} className={styles.paperComponent}>
                 {/* breadcrumbs */}
                 <Breadcrumbs aria-label="breadcrumb">
-                    {product.breadcrumbs?.map((obj, index) => {
+                    {product?.breadcrumbs?.map((obj, index) => {
                         return (
                             <Link key={obj.id} underline="hover" color="inherit" href={obj.href}>
                                 {obj.name}
                             </Link>
                         )
                     })}
-                    <Typography color="text.primary">{product.title}</Typography>
+                    <Typography color="text.primary">{product?.title}</Typography>
                 </Breadcrumbs>
                 {/* image collape */}
                 <ImageList variant="masonry" cols={3} gap={8} sx={{ marginTop: "20px" }}>
@@ -120,11 +120,11 @@ export default function ProductDetails() {
                 <Stack direction={{ xs: 'column-reverse', md: 'row' }} spacing={2}>
                     <Box sx={{ flexBasis: 0, flexGrow: 3 }}>
                         <Typography variant='h6' gutterBottom>
-                            {product.description}
+                            {product?.description}
                         </Typography>
-                        <Typography variant='h6'>
+                        {highlights && <Typography variant='h6'>
                             Highlights
-                        </Typography>
+                        </Typography>}
                         <ul style={{ margin: "10px 0px" }}>
                             {
                                 highlights?.map((list, index) => {
@@ -136,9 +136,9 @@ export default function ProductDetails() {
                                 })
                             }
                         </ul>
-                        <Typography variant='h6' gutterBottom>Details</Typography>
+                        {product?.details && <Typography variant='h6' gutterBottom>Details</Typography>}
                         <Typography variant='body'>
-                            {product.details}
+                            {product?.details}
                         </Typography>
                     </Box>
                     <Box sx={{ display: { xs: "none", md: "block", borderLeft: `1px solid ${borderColor}` } }}></Box>
@@ -151,7 +151,7 @@ export default function ProductDetails() {
                             <Typography variant='body' sx={{ marginLeft: "10px" }}>{reviews?.totalCount} reviews</Typography>
                         </Box>
                         <FormControl>
-                            <Typography variant='h6' gutterBottom>Color</Typography>
+                            {colors && <Typography variant='h6' gutterBottom>Color</Typography>}
                             <RadioGroup
                                 aria-labelledby="demo-controlled-radio-buttons-group"
                                 name="controlled-radio-buttons-group"
@@ -170,7 +170,7 @@ export default function ProductDetails() {
                             </RadioGroup>
                         </FormControl>
 
-                        <Typography variant='h6' gutterBottom>Size</Typography>
+                        {sizes && <Typography variant='h6' gutterBottom>Size</Typography>}
                         <Grid container spacing={2}>
                             {
                                 sizes?.map((obj, index) => {

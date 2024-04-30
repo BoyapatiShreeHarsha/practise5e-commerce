@@ -6,7 +6,7 @@ async function createProduct(req, res) {
         const body = req.body;
         const newProduct = new Product(body);
         await newProduct.save();
-        res.status(200).json({ data: newProduct });
+        res.status(200).json(newProduct);
     } catch (error) {
         res.status(404).json(error);
     }
@@ -28,7 +28,7 @@ async function updateProduct(req, res, next) {
             return res.status(403).json({ data: "Product not found" });
         }
 
-        return res.status(200).json({ data: updatedProduct });
+        return res.status(200).json(updatedProduct);
     } catch (error) {
         next(error);
     }
@@ -45,7 +45,7 @@ async function fetchProduct(req, res, next) {
             return res.status(403).json({ data: "Product not found" });
         }
 
-        return res.status(200).json({ data: productData });
+        return res.status(200).json(productData);
     } catch (error) {
         // even thought there is a global chatch i need to use try catch
         next(error)
@@ -58,10 +58,16 @@ async function fetchProductsByFilters(req, res, next) {
     // filter = {"category":["smartphone","laptops"]}
     // sort = {_sort:"price",_order="desc"}
     // pagination = {_page:1,_per_page=12}.
-
+    // admin = {admin:true}
     try {
-        let query = Product.find({});
-        let totalProductsQuery = Product.find({});
+        let condition = {}
+
+        if (req.query.admin === "false") {
+            condition.delete = { $ne: true }
+        }
+
+        let query = Product.find(condition);
+        let totalProductsQuery = Product.find(condition);
 
         if (req.query.category) {
             const categories = req.query.category.split(",");
